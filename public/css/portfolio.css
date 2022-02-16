@@ -1,0 +1,172 @@
+#container {
+  background: none;
+  min-height: 100vh;
+  background-color: rgb(233, 103, 103);
+}
+.portfolio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  margin-top: 100px;
+}
+.portfolio-container h1 {
+  margin: 0 0 1rem 0;
+  font-size: 3rem;
+}
+hr {
+  border: 5px solid black;
+  width: 80%;
+}
+.profile {
+  margin-top: 1rem;
+  height: 150px;
+  width: 150px;
+}
+.portfolio-gallery-container {
+  /* border: 2px solid black; */
+  padding: 2rem;
+  width: 80%;
+
+  text-align: center;
+}
+.portfolio-container .portfolio-gallery {
+  /* background-color: rgb(231, 28, 28); */
+  margin-top: 3rem;
+  width: 1200px;
+  /* border-bottom: none; */
+  padding: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  max-height: max-content;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portfolio-container .portfolio-gallery .gallery-image {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  border: none;
+  /* border: 3px solid rgb(128, 128, 128); */
+  color: black;
+  font-weight: bold;
+  background-color: rgb(224, 224, 224);
+
+  border-radius: 5px;
+}
+.gallery-image .purchased-nfts {
+  height: 150px;
+  width: 150px;
+  margin: 1rem 0;
+}
+.username {
+  margin: 1rem 0;
+}
+
+.login {
+  padding: 2rem;
+  margin-top: 100px;
+  height: 100vh;
+  color: white;
+  position: relative;
+  font-weight: bold;
+  background-color: rgb(10, 10, 10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url(../images/nft-license-image.png) center center/cover no-repeat;
+
+  opacity: 0.2;
+}
+h2,
+a {
+  z-index: 1;
+  cursor: pointer;
+}
+
+.net-worth {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/*Sell Screen*/
+
+.sell-screen,
+.order-summary {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(251, 248, 16);
+  z-index: 100;
+  height: 800px;
+  width: 800px;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.sell-screen {
+  display: none;
+}
+
+.sell-screen img {
+  height: 400px;
+  width: 400px;
+  margin: 1rem 0;
+}
+.sell-screen h3,
+.sell-screen h4 {
+  margin: 1rem 0;
+}
+.heading-nft {
+  font-size: 2rem;
+  margin-bottom: -1rem;
+}
+.sell-screen .sell-nft {
+  margin-top: -1rem;
+}
+.sell-nft {
+  margin-top: 1rem;
+}
+
+.add-to-portfolio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-to-portfolio a {
+  padding: 2rem;
+  background-color: black;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: white;
+  cursor: pointer;
+}
+.receipt {
+  display: none;
+  background-color: white;
+  padding: 1rem;
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+}
+.receipt p {
+  line-height: 1.6;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.paper {
+  color: red;
+}

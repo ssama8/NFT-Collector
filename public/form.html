@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/de9b8a8f63.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/form.style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="background">
+    <div class="profile-icon-container">
+      <h3>Select A Profile Icon</h3>
+      <div class="gallery-container">
+     
+    </div>
+    <button class ="btn" id="finish-sign-up">Set Profile Image</button>
+    </div>
+    <div class="grid">
+      <form action="" class="sign-up">
+        <h3> Welcome To NFT Collector</h3>
+        <label for="username" id = "username-label"> Create a Username: </label>
+        <div class="username-container">
+          <input type="text" name="username" id="username">
+         
+        </div>
+        <label for="passowrd">Create a Passowrd: </label>
+        <div class="password-container">
+          <input type="password" name="password" id="password">
+          <div class="eye" id = "create">
+            <div class="pupil"></div>
+          </div>
+          <div class="slash" id = "slash-password"></div>
+        </div>
+        <div class="password-strength">
+          <h4>Password strength</h4>
+          <div class="strength-meter">
+            <div class="meter"></div>
+          </div>
+        </div>
+       
+        
+        <label 
+        for="confirm-password">Confirm Password: </label>
+        <div class="confirm-password-container">
+          <input type="password" name="confirm-password" id="confirm-password">
+          <div class="eye" id = "confirm">
+            <div class="pupil"></div>
+          </div>
+          <div class="slash" id = "slash-confirm"></div>
+        </div>
+        <input type="submit" value="Create Account" id = "btn">
+      </form>
+    
+    </div>
+
+  
+  
+  </div>
+  <script type = "module" src="./js/sign-up-form.js"></script>
+</body>
+</html>

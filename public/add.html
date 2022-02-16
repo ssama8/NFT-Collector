@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/portfolio.css">
+  <link rel="stylesheet" href="./css/add-nft.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <nav id="navbar">
+        <ul class = "menu">
+          <a href="index.html" > <li>Home </li></a>
+          <a href="add.html" class = "current"> <li>Add Your Own NFT </li></a>
+          <a href="portfolio.html"> <li>Portfolio </li></a>
+
+
+
+        </ul>
+        <div id = "account-btns"> 
+          <a href="form.html" class="btn btn-light" id = "sign-up">Sign Up</a>
+          <a href="login.html" class="btn btn-light-2" id = "login-btn">Login</a>
+          <div id="profile">
+            <img src="" alt="" id = "profile-image-display">
+            <ul  id = "account-details">
+              <li id = "sign-out">Sign Out</li>
+              <li id = "account-settings">  Account Settings</li>
+              <a href=""><li> Preferences</li></a>
+              <a href=""><li> Delete Account</li></a>
+      
+      
+      
+      
+            </ul>
+           
+          </div>
+
+        
+         <!-- <i class="fas fa-user-alt fa-3x" id = "profile"></i> 
+           <i class="fas fa-users fa-3x"></i> -->
+          
+
+        </div>
+      </nav>
+  
+      
+   
+    </div>
+    <div class="login">
+      <h2 class = "test">You Are Not Logged In To Your Account</h2>
+      <p>If you already have an existing account then login:</p>
+      <a href="login.html"> Login</a>
+      <p>If you don't already have an account, signup: </p>
+      <a href="form.html"> SignUp</a>
+
+    </div>
+    <div class="add-nft-page">
+      <div id="showcase">
+        <!-- <div class="account-settings">
+          <img src="" alt="nothing" class="profile-picture"> -->
+          
+          <!-- <h4 class="profile-username"></h4>
+          <h4 class="profile-password"></h4> -->
+    
+    
+        <!-- </div>   -->
+        <div class="add-screen">
+          <h2 class = "main-header"> Make Your Own NFT</h2>
+          <hr>
+          <form action="" class="create-nft">
+            <label class="name-label" for="name"> What do you want to name this NFT?</label>
+            <input type="text" name="name" id="name">
+            <label for="value-on-paper" class = "paper-value"> How much do you want the NFT to be worth on paper in millions ? </label>
+            <input type="text" name="valu" id="value-on-paper">
+            <label for="nft-url"> Enter the image address pointing to the image :  </label>
+            <input type="text" name="url" id="nft-url">
+            <h3 class="nft-name"></h3>
+            <img src="./images/loading-screen.gif" alt="" class="loading-screen"> 
+            
+            <img src="" alt="" class="preview-nft" 
+            >
+
+            <h3 class="nft-price"></h3>
+            <input type="submit" value="Preview " class = "preview-btn"> 
+          </form>
+  
+        </div>
+      </div>
+    </div>
+    
+
+    
+  </div>
+  <script src="./js/httpRequests.js"></script>
+  <script src="./js/menu.js"></script>
+  <script src="./js/add-nft.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+.counter {
+  display: flex;
+  align-items: center;
+}
+.quantity {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 1rem;
+}
+.decrement,
+.increment {
+  background-color: red;
+  height: 40px;
+  border-radius: 70px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  cursor: pointer;
+}
+.increment {
+  display: block;
+  position: relative;
+}
+.subtract-sign,
+.vertical-sign {
+  width: 35px;
+  height: 5px;
+  margin: 0 auto;
+  background-color: black;
+}
+.increment .subtract-sign {
+  position: absolute;
+  top: 12.5px;
+  left: 7.5px;
+  width: 30px;
+}
+.vertical-sign {
+  position: absolute;
+  width: 30px;
+  top: 15px;
+  left: 7.5px;
+  transform: rotate(90deg);
+}

@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: arial;
+}
+#container {
+  height: 100vh;
+  background-color: rgb(59, 184, 241);
+
+  padding: 2rem;
+}
+.container-2 {
+  /* background-color: green; */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.container-2 h1 {
+  font-size: 5rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+.nft-area {
+  padding: 3rem;
+}
+.heading {
+  display: flex;
+  margin: 0 0 2rem 0;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading h3 {
+  font-size: 4rem;
+}
+.heading h5 {
+  font-size: 2rem;
+}
+
+.nft-pic {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: min-content;
+  grid-gap: 2rem;
+  /* display: none; */
+}
+.nft-to-buy {
+  transform: scale(0.7) translate(-20%, -20%);
+}
+.nft-license-background {
+  /* background: url("nft-license-image.png") center center/cover; */
+  /* border: 10px solid yellow; */
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.nft-license-background h4,
+.place-order {
+  /* background: url("nft-license-image.png") center center/cover; */
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+.nft-license-background p {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  font-weight: bold;
+}
+.nft-license-background h3 {
+  /* background: url("nft-license-image.png") center center/cover; */
+  font-size: 3rem;
+  margin: 1rem 0;
+}
+.b1 {
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
+  border: 5px solid black;
+  position: relative;
+}
+.counter {
+  display: flex;
+  align-items: center;
+}
+.quantity {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 1rem;
+}
+.decrement,
+.increment {
+  background-color: red;
+  height: 40px;
+  border-radius: 70px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  cursor: pointer;
+}
+.increment {
+  display: block;
+  position: relative;
+}
+.subtract-sign,
+.vertical-sign {
+  width: 35px;
+  height: 5px;
+  margin: 0 auto;
+  background-color: black;
+}
+.increment .subtract-sign {
+  position: absolute;
+  top: 12.5px;
+  left: 7.5px;
+  width: 30px;
+}
+.vertical-sign {
+  position: absolute;
+  width: 30px;
+  top: 15px;
+  left: 7.5px;
+  transform: rotate(90deg);
+}
+.place-order {
+  margin: 3rem 0;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+.purchase-screen {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  display: none;
+}
+.order-summary {
+  font-size: 2rem;
+  line-height: 1.6;
+  width: 40%;
+  margin-top: -2rem;
+}
+#arrow {
+  height: 20px;
+  width: 20px;
+}
+
+.back-arrow {
+  cursor: pointer;
+}
+.arrow-tip {
+  height: 25px;
+  width: 25px;
+  /* background-color: green; */
+  border-top: 10px solid blue;
+  border-left: 10px solid blue;
+  transform: rotate(-45deg);
+}
+.arrow {
+  height: 10px;
+  width: 50px;
+  background-color: blue;
+  margin-top: -17.5px;
+}
+.name {
+  color: rgb(180, 17, 17);
+}
+.purchase-screen h3 {
+  font-size: 4rem;
+}
+.purchase-screen h4 {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+.purchase-screen p {
+  margin-bottom: -2rem;
+}
+.purchase-screen img {
+  transform: scale(0.5);
+  margin-top: -100px;
+  margin-bottom: -2rem;
+}
+
+.menu-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.menu-screen > * {
+  margin: 1rem 0;
+}
+.menu-screen h3 {
+  font-size: 2rem;
+}
+.menu-screen p {
+  font-size: 1.5rem;
+}
+.menu-screen a {
+  text-decoration: none;
+  color: white;
+  padding: 1rem 2rem;
+  background-color: rgb(151, 139, 27);
+}
