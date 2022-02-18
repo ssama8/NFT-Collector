@@ -88,7 +88,7 @@ async function checkUserData(){
       calculatePortfolioWorth()
 
     })
-  addBuy();
+  //addBuy();
 
   } 
 }
@@ -110,15 +110,15 @@ function calculatePortfolioWorth(){
 }
 let currentItem;
 
-function addBuy(){
-  const div = document.createElement('div');
-  div.classList.add('add-to-portfolio')
-  const button = document.createElement('a');
-  button.textContent = "Buy More NFT's"
-  button.href = "http://localhost:5000/index.html"
-  div.appendChild(button);
-  gallery.appendChild(div);
-}
+// function addBuy(){
+//   const div = document.createElement('div');
+//   div.classList.add('add-to-portfolio')
+//   const button = document.createElement('a');
+//   button.textContent = "Buy More NFT's"
+//   button.href = "http://localhost:5000/index.html"
+//   div.appendChild(button);
+//   gallery.appendChild(div);
+// }
 
 
 portfolioSection.addEventListener('click', sellItem)
@@ -165,9 +165,6 @@ const priceOfItem = document.querySelector('.price-description');
     
   }
 }
-// const decrementCounter = document.querySelector('.decrement');
-// const incrementCounter = document.querySelector('.increment');
-// const counterValue = document.querySelector('.quantity');
 
 
 
@@ -193,6 +190,8 @@ function subtractCounter(){
   console.log(priceToSell);
   sellValue.textContent = `$${+(priceToSell * parseInt(counterValue.textContent)).toFixed(2)} million`;
 }
+
+
 function addCounter(){
   const priceOfItem = document.querySelector('.price-description');
   const sellValue = document.querySelector('.sell-value')
@@ -226,7 +225,7 @@ function updatePortfolio(e){
     console.log(itemToSell);
     console.log(nameSoldNFT);
     console.log(priceToSell);
-const postPurchases = new httpRequest("http://localhost:5000/users", loggedInUser.username, itemToSell, loggedInUser.password, counterQuantity  )
+const postPurchases = new httpRequest("http://localhost:5000/users", loggedInUser.username, itemToSell, loggedInUser.password,maxSellNumber -  counterQuantity  )
 postPurchases.nftPostPurchasesRequest(priceToSell, nameSoldNFT, "sell")
 
   //  postPurchases(loggedInUser.username, loggedInUser.password, itemToSell, priceToSell,  maxSellNumber - parseInt(counterValue.textContent) , nameSoldNFT )

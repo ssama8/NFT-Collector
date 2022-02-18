@@ -13,27 +13,32 @@ const newNFTPrice = document.querySelector('.nft-name')
 let error;
 const loadingScreen =  document.querySelector('.loading-screen') 
 previewBtn.addEventListener('click', previewTheNFT)
-
+let loggedInUser 
 function init(){
-//   const getUser = new httpRequest("http://localhost:5000/users")
-//  getUser.getRequest()
-//   .then(data=>{
-//     console.log(data)
-//     let copy = data;
-//     copy.filter((user)=>{
-//       if(user.login){
-//         loggedInUser = user
-//       }
-//     })
-//     if(loggedInUser === undefined){
-//       const portfolioSection = document.querySelector('')
-//       portfolioSection.style.display = "none";
-//     }else{
-//       loginSection.style.display = "none"
-//     }
-//   })
+  const getUser = new httpRequest("http://localhost:5000/users")
+ getUser.getRequest()
+  .then(data=>{
+    console.log(data)
+    let copy = data;
+    copy.filter((user)=>{
+      if(user.login){
+        loggedInUser = user
+      }
+    })
+    if(loggedInUser === undefined){
+      const loginSection = document.querySelector('#showcase');
+      console.log(loginSection)
+      loginSection.style.display = "none"
+     
+    }else{
+      const portfolioSection = document.querySelector('.login');
+      portfolioSection.style.display = "none";
+     
+      
+    }
+  })
 }
-
+init();
 
 form.addEventListener('click', sendPostRequest)
 
@@ -52,7 +57,7 @@ function previewTheNFT(e){
       image.src = urlInput.value
       image.onerror = checkError
       
-      
+      previewBtn.style.display = "none";
       setTimeout(fillOutPreview, 1500)
      //console.log(imageShown);
 
@@ -89,6 +94,7 @@ function fillOutPreview(){
   
     image.alt = "test";
    
+    previewBtn.style.display = "block";
 
     previewBtn.classList.add('submit');
     previewBtn.value = "Add To NFT Gallery "
@@ -120,7 +126,8 @@ function removeErrorMSG(div){
 function sendPostRequest(e){
   if(e.target.classList.contains('submit')){
     const addNFt = new httpRequest("http://localhost:5000/users/pics" )
-    addNFt.addNFT(image.src, nameInput.value, parseFloat(priceInput.value))
+    addNFt.addNFT(image.src, nameInput.value, priceInput.value)
+    window.location.href = "index.html#gallery"
   }
 }
 

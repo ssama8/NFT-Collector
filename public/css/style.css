@@ -69,19 +69,71 @@ body {
   color: rgb(26, 142, 236);
 }
 
-#account-details {
+/* #account-details {
   background-color: white;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-self: flex-end;
   position: absolute;
+} */
+#account-details {
+  background-color: #333;
+  text-align: center;
+  position: absolute;
+  left: -30px;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  display: none;
 }
-#account-details a {
+#account-details div > li {
+  padding: 1rem;
+  margin: 1rem 0;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+#account-details div > li:hover {
+  background-color: #999;
+  color: blue;
+}
+.account-settings {
+  position: absolute;
+  top: 100px;
+  height: 200px;
+  width: 200px;
+  background-color: white;
+}
+.profile-picture {
+  width: 100px;
+  height: 100px;
+}
+/* #account-details a {
   display: inline-block;
   color: black;
   margin: 0.5rem 0;
+} */
+#account-details div {
+  width: 100%;
 }
+#account-details aside ul {
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#account-details aside ul img {
+  width: 75px;
+  height: 75px;
+}
+
 #account-btns {
   display: flex;
   justify-content: flex-end;
@@ -91,8 +143,13 @@ body {
 /*Showcase Section*/
 #showcase {
   background: url(../images/nft-show.jpg) center center/cover no-repeat;
-  height: 90vh;
+  height: 100vh;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+#showcase > * {
+  z-index: 50;
 }
 .add-nft-page #showcase {
   background: url(../images/addnft.jpg) center center/cover no-repeat;
@@ -112,7 +169,7 @@ body {
   content: "";
   position: absolute;
   background-color: rgb(58, 16, 16);
-  height: 90vh;
+  height: 100vh;
   width: 100%;
   opacity: 0.3;
   /* z-index: 1000; */
@@ -122,6 +179,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4rem;
+  padding: 2rem;
   max-width: var(--website-width);
   margin: 0 auto;
 }
@@ -146,7 +204,7 @@ body {
   margin: 0 1rem;
 }
 
-#profile-image-display {
+.profile-image {
   height: 90px;
   width: 90px;
   border-radius: 10px;
@@ -162,41 +220,6 @@ body {
 }
 /* #profile #account-details {
 } */
-#account-details {
-  background-color: #333;
-  text-align: center;
-  position: absolute;
-  left: -30px;
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  display: none;
-}
-#account-details li {
-  padding: 1rem;
-  margin: 1rem 0;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-  transition: all 0.25s;
-}
-#account-details li:hover {
-  background-color: #999;
-  color: blue;
-}
-.account-settings {
-  position: absolute;
-  top: 100px;
-  height: 200px;
-  width: 200px;
-  background-color: white;
-}
-.profile-picture {
-  width: 100px;
-  height: 100px;
-}
 
 .gallery-pic {
   display: flex;

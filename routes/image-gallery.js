@@ -3,7 +3,7 @@ let images = [{
   src: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-4.png",
   name: "Bored Ape #2087",
   price: "2.3 ",
-  description : `Sold for 2.3 million USD at the time of the transaction`
+  description : `Sold for $2.3 million USD at the time of the transaction`
 
 },
 {

@@ -33,7 +33,7 @@ body {
   justify-content: space-between;
 }
 .heading h3 {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 .heading h5 {
   font-size: 2rem;
@@ -47,7 +47,9 @@ body {
   /* display: none; */
 }
 .nft-to-buy {
-  transform: scale(0.7) translate(-20%, -20%);
+  /* transform: scale(0.7) translate(-20%, -20%); */
+  width: 400px;
+  height: 400px;
 }
 .nft-license-background {
   /* background: url("nft-license-image.png") center center/cover; */

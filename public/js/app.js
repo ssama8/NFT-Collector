@@ -15,9 +15,28 @@ container.addEventListener("click", showProfileSettings)
 container.addEventListener('click', signOut);
 //container.addEventListener('click', updateProfile);
 container.addEventListener('click', buyNFT);
+container.addEventListener('click', updateChangeRequest);
 
 
 
+const checkLogin = new httpRequest("http://localhost:5000/users")
+checkLogin.getRequest()
+.then(data =>{
+  let copy = data;
+  let filtered = copy.filter((user)=>{
+    return user.login
+  })
+  console.log(filtered);
+  if(filtered.length === 0){
+    getImages();
+
+  }else{
+    console.log("get saved images")
+    filtered[0].images.map((image)=>{
+      populateGallery(image);
+    })
+  }
+})
 
  function getImages(){
 
@@ -26,27 +45,10 @@ container.addEventListener('click', buyNFT);
 users.getRequest()
   .then(data=> {
     console.log(data);
-    data.map((user)=>{
-      let parentDiv = document.createElement('div');
-      parentDiv.classList.add("gallery-pic")
-      let header = document.createElement('h3');
-      let description = document.createElement('p');
-      header.textContent = user.name;
-      description.textContent = user.description;
-      let button = document.createElement('button');
-      button.textContent = "Buy Now";
-      button.classList.add('buy-nft')
-      let div = document.createElement('img');
-      div.classList.add('showcase')
-      parentDiv.appendChild(header);
-      parentDiv.appendChild(div);
-      parentDiv.appendChild(button);
-       parentDiv.appendChild(description);
-
-
-       let parent = document.querySelector('#gallery');
-       div.src = user.src;
-       parent.appendChild(parentDiv);
+    let copyData = data.slice(0,9)
+    copyData.map((user)=>{
+     populateGallery(user);
+     
     })
     
   
@@ -54,32 +56,31 @@ users.getRequest()
   .catch(err=> console.log(err));
   ;
 }
-getImages();
 
 
+function populateGallery(user){
+  let parentDiv = document.createElement('div');
+  parentDiv.classList.add("gallery-pic")
+  let header = document.createElement('h3');
+  let description = document.createElement('p');
+  header.textContent = user.name;
+  description.textContent = user.description;
+  let button = document.createElement('button');
+  button.textContent = "Buy Now";
+  button.classList.add('buy-nft')
+  let div = document.createElement('img');
+  div.classList.add('showcase')
+  parentDiv.appendChild(header);
+  parentDiv.appendChild(div);
+  parentDiv.appendChild(button);
+   parentDiv.appendChild(description);
 
 
+   let parent = document.querySelector('#gallery');
+   div.src = user.src;
+   parent.appendChild(parentDiv);
 
-
-
-// async function sendURl(userName, image){
-//   console.log(userName); console.log(image);
-//   const rawResponse =  await fetch('http://localhost:5000/users/placeorder', {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({username: userName,  url : image})
-//   })
-
-
-  
-// // //getRequest();
-
-//  }
-
-
+}
 
 
 function buyNFT(e){
@@ -92,20 +93,20 @@ function buyNFT(e){
   
     }else{
       console.log(" buy item")
-      console.log(currentUser);
+      //console.log(currentUser.images);
       let siblingElements = [...e.target.parentElement.childNodes]
       let img = siblingElements.filter((node)=>{
         return node.classList.contains("showcase")
       })
+  
     const url = img[0].src
-    //console.log(img[0].src);
-     // sendURl(currentUser[0].userName, url )
-    const nftToOrder = new httpRequest("http://localhost:5000/users/placeorder", currentUser[0].userName, url )
+    console.log(url)
+    console.log(img[0].src);
+    console.log(currentUser[0].username);
+   const nftToOrder = new httpRequest("http://localhost:5000/users/placeorder", currentUser[0].username, url )
     nftToOrder.nftOrderPostRequest();  
 
-      // const get = fetch("http://localhost:5000/users/placeorder")
-      // .then(data=> data.json())
-      // .then(data => console.log(data));
+ 
        window.location.href = "http://localhost:5000/order.html"
     }
  
@@ -116,62 +117,26 @@ function buyNFT(e){
 
 
 
+function updateChangeRequest(e){
+//  console.log(e.target.classList)
+  if(e.target.classList.contains("change-request")){
+  e.preventDefault()
 
+    console.log('update settings')
+    const sendData = new httpRequest("http://localhost:5000/users/change-request")
+    console.log(e.target.id)
+    if(e.target.id === "change-profile-image" ){
+      sendData.sendProfileSettings(true)
+    }else if(e.target.id === "change-username"){
+      sendData.sendProfileSettings(null, true)
 
+    }else{
+      sendData.sendProfileSettings(null, null,  true)
 
+    }
 
+    console.log("running")
+    window.location.href = 'changeAccountSettings.html';
 
-
-// function validateUser(e){
-//   e.preventDefault();
-
-//   let valid = false
-//   const firstName = firstNameField.value;
-//   const lastName = lastNameField.value;
-//   const age = ageField.value;
-//   let details =  getDetails();
-//   console.log(details);
-//   details.then(data=> {
-//     console.log(data);
-//     data.map((user)=>{
-//       if(user.firstName === firstName 
-//         && user.lastName === lastName 
-//         && user.age === parseInt(age) 
-//         ){
-//         valid =true;
-//       }
-//       console.log(firstName, lastName, age);
-//     })
-    
-//     console.log(valid);
-//     displayValidation(valid);
-
-//   });
-  
-
-// }
-// console.log("running");
-
-// function displayValidation(valid){
-//   let message;
-//   if(valid){
-//     message = "User Found Here's you're account"
-//     createMessage(message);
-//   }else{
-//     message = "user not found"
-//     createMessage(message);
-
-//   }
-// }
-
-// function createMessage(message){
-//   const area = document.createElement('div');
-//   let text = document.createTextNode(message);
-//   area.appendChild(text);
-//   form.insertBefore(area, firstNameField)
-//   setTimeout(removeMessage, 2000, area);
-
-// }
-// function removeMessage(area){
-//   area.remove();
-// }
+  }
+}

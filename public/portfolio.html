@@ -14,7 +14,7 @@
     <div id="header">
       <nav id="navbar">
         <ul class = "menu">
-          <a href="index.html" > <li>Home </li></a>
+          <a href="index.html#gallery" > <li>Home </li></a>
           <a href="add.html"> <li>Add Your Own NFT </li></a>
           <a href="" class = "current"> <li>Portfolio </li></a>
 
@@ -25,12 +25,30 @@
           <a href="form.html" class="btn btn-light" id = "sign-up">Sign Up</a>
           <a href="login.html" class="btn btn-light-2" id = "login-btn">Login</a>
           <div id="profile">
-            <img src="" alt="" id = "profile-image-display">
+            <img src="" alt="" class = "profile-image" id = "profile-image-display">
             <ul  id = "account-details">
-              <li id = "sign-out">Sign Out</li>
-              <li id = "account-settings">  Account Settings</li>
-              <a href=""><li> Preferences</li></a>
-              <a href=""><li> Delete Account</li></a>
+              <div>
+                <li id = "sign-out">Sign Out</li>
+              </div>
+              <div>
+                <li id = "account-settings">  Account Settings</li>
+                <aside> 
+                  <ul>
+                    <li> <h3>Profile Image: </h3> </li>
+                    <img src="" alt="" class = "profile-image ">
+                    <a href = "changeAccountSettings.html
+                    " class = "change-request" id = "change-profile-image"> Change Profile Photo</a>;
+                    <li> <h3> Username : <span class="current-username"> ssama2</span> </h3></li>
+                    <button class = "change-request" id = "change-username"> Change Username</button>
+                    <li> <h3> Password: <input type="password" value = "test" name="password" id="current-password" disabled ></h3></li>
+                    <button class = "change-request" id = "change-password"> View Password</button>
+  
+                  </ul>
+                </aside>
+              </div>
+             
+              <div ><li> Preferences</li></div>
+              <div ><li> Delete Account</li></div>
       
       
       
@@ -65,6 +83,9 @@
       <hr>
       <div class="portfolio-gallery-container">
         <h5 class = "net-worth"></h5>
+        <div class="add-to-portfolio">
+          <a href="http://localhost:5000/index.html#gallery">Buy More NFT's </a>
+        </div>
         <div class="portfolio-gallery">
 
         </div>

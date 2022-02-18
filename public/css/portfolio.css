@@ -67,7 +67,8 @@ hr {
   margin: 1rem 0;
 }
 
-.login {
+.login,
+.login-add-page .login {
   padding: 2rem;
   margin-top: 100px;
   height: 100vh;
@@ -80,6 +81,8 @@ hr {
   align-items: center;
   flex-direction: column;
 }
+.login-add-page .login {
+}
 
 .login::before {
   content: "";
@@ -90,6 +93,11 @@ hr {
 
   opacity: 0.2;
 }
+.login-add-page .login::before {
+  background: url(../images/add-page-background.jpg) center center/cover
+    no-repeat;
+  opacity: 0.1;
+}
 h2,
 a {
   z-index: 1;
@@ -98,7 +106,7 @@ a {
 
 .net-worth {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 /*Sell Screen*/
@@ -147,7 +155,7 @@ a {
   align-items: center;
 }
 .add-to-portfolio a {
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   background-color: black;
   font-weight: bold;
   font-size: 1.25rem;

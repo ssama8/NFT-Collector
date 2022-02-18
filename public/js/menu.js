@@ -5,6 +5,7 @@ const container = document.getElementById('container');
 container.addEventListener("click", showProfileSettings)
 container.addEventListener('click', signOut);
 //container.addEventListener('click', updateProfile);
+container.addEventListener('click', updateChangeRequest);
 
 const accountState = {
   signedIn : false
@@ -34,20 +35,35 @@ async function getDetails(){
 function showLoginStatus(){
   getDetails()
     .then(data=> {
+      console.log(data);
       if(data.length !== 0){
+        console.log("show")
         signUpBtn.style.display = "none";
             loginButton.style.display = "none";
-      
             profile.style.display = "block" 
-            const img = document.getElementById('profile-image-display');
-          
-            img.src = data[0].profilePic
+        console.log(profile);
+
+            //const img = document.getElementById('profile-image-display');
+            const img = document.querySelectorAll('.profile-image');
+            console.log(img)
+            img.forEach((img)=>{
+              img.src = data[0].profilePic
+
+            })
+            const usernameDisplay = document.querySelector('.current-username')
+            const passwordDisplay = document.querySelector('#current-password')
+
+            usernameDisplay.textContent = data[0].username;
+            passwordDisplay.value= data[0].password;
+
             console.log(data)
             currentUser = data;
+
           
       
             accountState.signedIn = true;
       }else{
+        console.log('get rid of')
         profile.style.display = "none"     
   
             signUpBtn.style.display = "block";
@@ -105,6 +121,30 @@ function signOut(e){
 
 
 
+
+function updateChangeRequest(e){
+  //  console.log(e.target.classList)
+    if(e.target.classList.contains("change-request")){
+    e.preventDefault()
+  
+      console.log('update settings')
+      const sendData = new httpRequest("http://localhost:5000/users/change-request")
+      console.log(e.target.id)
+      if(e.target.id === "change-profile-image" ){
+        sendData.sendProfileSettings(true)
+      }else if(e.target.id === "change-username"){
+        sendData.sendProfileSettings(null, true)
+  
+      }else{
+        sendData.sendProfileSettings(null, null,  true)
+  
+      }
+  
+      console.log("running")
+      window.location.href = 'changeAccountSettings.html';
+  
+    }
+  }
 
 
 // async function sendPatchReguest(username, password, status){

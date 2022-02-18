@@ -167,7 +167,7 @@ function checkIfPasswordsMatch(password, passwordConfirmation){
     console.log("success")
 
      signinForm.style.display = "none";
-     //populateGallery();
+     populateGallery();
 
   }
 }

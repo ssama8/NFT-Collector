@@ -75,10 +75,13 @@ function goBack(){
 
   orderScreen.style.display = "grid"
 }
+
 const getOrderedNFT = new httpRequest("http://localhost:5000/users/placeorder")
 async function getCorrectNFT(){
+  console.log("running")
   getOrderedNFT.getRequest()
   .then(data => {
+    console.log(1);
    // nftSpot.src = data.url;
     nftSpot.forEach((img)=>{
       img.src = data.url;
@@ -89,7 +92,7 @@ async function getCorrectNFT(){
       header = data.name;
     })
     priceSpan.forEach((span)=>{
-      span.textContent = `${data.price}`;
+      span.textContent = `${data.price} million`;
       price = data.price
     })
     

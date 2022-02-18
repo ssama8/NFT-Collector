@@ -51,12 +51,32 @@ async  loginRequest (status){
 }
 async addNFT (url, name, price ){
   const addImage = await fetch(this.url,  {
-    method: 'POST',
+    method: 'PATCH',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({src: url,  name: name, price: parseInt(price), description: `Sold for ${price} million USD at the time of the transaction `})
+    body: JSON.stringify({src: url,  name: name, price: price, description: `Sold for ${price} million USD at the time of the transaction `})
+  })
+}
+async changeProfileSettings ( image, username, password ){
+  const changeProfileSettings = await fetch(this.url,  {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({url: image, newusername: username, newpassword: password})
+  })
+}
+async sendProfileSettings ( image, username, password ){
+  const changeProfileSettings = await fetch(this.url,  {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({profileImage: image, username: username, password: password})
   })
 }
 

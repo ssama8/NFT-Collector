@@ -1,5 +1,5 @@
 import images from "./image-gallery.js";
-
+let imageCopy = images;
 let users = [
   {
     username: "ssama2",
@@ -14,14 +14,12 @@ let users = [
   }
 
 ],
-  images: {
-    images
-  }
-  },
+  images: imageCopy
+},
   {
     username: "geazy7",
     password : "sleezyI",
-    login: false,
+    login: true,
     profilePic: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-8.png",
     purchasedItems:    [   {
   url: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-8.png",
@@ -29,9 +27,7 @@ let users = [
   quantity: 8,
   name: "Bored Ape #2087"
 }],
-images: {
-  images
-}
+images: imageCopy
 
   }
 ]
