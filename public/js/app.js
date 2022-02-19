@@ -10,12 +10,12 @@ const profile = document.getElementById('profile');
 console.log('running');
 const display = document.getElementById('display-info')
 const container = document.getElementById('container');
+const alertLayer = document.querySelector(".relative-layer")
 
-container.addEventListener("click", showProfileSettings)
-container.addEventListener('click', signOut);
+
 //container.addEventListener('click', updateProfile);
 container.addEventListener('click', buyNFT);
-container.addEventListener('click', updateChangeRequest);
+container.addEventListener("click", removeAlert)
 
 
 
@@ -90,6 +90,8 @@ function buyNFT(e){
     if(!accountState.signedIn){
       console.log("can't buy item")
     //  console.log(e.target.parentElement.childNodes)
+    showAlert();
+
   
     }else{
       console.log(" buy item")
@@ -115,28 +117,27 @@ function buyNFT(e){
 
 
 
+function showAlert(){
+ alertLayer.style.display = "block";
 
+  const alertOverlay = document.querySelector(".alert-overlay")
+  const customAlert = document.querySelector('.alert')
+  customAlert.style.height = `${window.innerHeight/4}px`
+  const height = customAlert.style.height
+  customAlert.style.width = `${window.innerWidth/2}px`
+  const width = customAlert.style.width
+  console.log(height)
+  const top =(window.innerHeight - parseInt(height)) /2;
+  console.log(top)
+  const left = (window.innerWidth - parseInt(width))/2
+  customAlert.style.top = `${top}px` ;
+  customAlert.style.left = `${left}px` ;
 
-// function updateChangeRequest(e){
-// //  console.log(e.target.classList)
-//   if(e.target.classList.contains("change-request")){
-//   e.preventDefault()
+  alertOverlay.style.top = `${0}px`
+}
 
-//     console.log('update settings')
-//     const sendData = new httpRequest("http://localhost:5000/users/change-request")
-//     console.log(e.target.id)
-//     if(e.target.id === "change-profile-image" ){
-//       sendData.sendProfileSettings(true)
-//     }else if(e.target.id === "change-username"){
-//       sendData.sendProfileSettings(null, true)
-
-//     }else{
-//       sendData.sendProfileSettings(null, null,  true)
-
-//     }
-
-//     console.log("running")
-//     window.location.href = 'changeAccountSettings.html';
-
-//   }
-// }
+function removeAlert(e){
+  if(e.target.id === "remove-alert"){
+    alertLayer.style.display = "none";
+  }
+}

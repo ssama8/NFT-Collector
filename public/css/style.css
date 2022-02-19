@@ -309,36 +309,71 @@ body {
   margin: 1rem 0;
   margin-top: -1rem;
 }
-/* #account-details li {
-  padding: 1rem;
-  cursor: pointer;
-}
-#account-details {
+
+/*Overlay */
+.relative-layer {
+  position: relative;
   display: none;
-} */
-
-/* #profile:before
- {
-  content: "";
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background-color: rgb(105, 180, 241);
-  height: 90px;
-  width: 90px;
-  opacity: 0.25;
-} */
-/* #simple-form {
-  display: flex;
+}
+.alert-overlay {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(124, 124, 124);
+  opacity: 0.75;
+  z-index: 100;
+}
+.alert {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: fixed;
+  text-align: center;
+  /*display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  width: var(--website-width);
+  margin: 0 auto;
+  z-index: 100000;
+  /* border: 10px solid black;
+  border-radius: 10%; */
+}
+.header,
+.footer {
+  background-color: rgb(29, 152, 235);
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border-radius: 10px 10px 0 0;
+}
+.footer {
+  border-radius: 0 0 10px 10px;
+}
+.footer button {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  background-color: rgb(23, 62, 131);
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: white;
 }
 
-.validation {
-  display: grid;
-  margin: 0 auto;
-  width: 80%;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 3rem 0;
-  padding-right: 0;
-  grid-gap: 3rem;
-} */
+.alert h3 {
+  padding: 1rem;
+
+  font-size: 2rem;
+  color: white;
+  width: 100%;
+}
+.body {
+  padding: 2rem;
+  background-color: rgb(216, 216, 216);
+}
+.alert p {
+  font-size: 1.5rem;
+
+  margin: 1rem;
+}
+.alert-container {
+  position: fixed;
+}
