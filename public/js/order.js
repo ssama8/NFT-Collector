@@ -52,9 +52,10 @@ function addCounter(){
 addEventListener();
 function showPurchaseScreen(){
   if(counterValue.textContent !== '0' ){
+    const h1 = document.querySelector('.place-order-heading')
+    h1.style.display = "none";
     orderScreen.style.display = "none"
   purchaseScreen.style.display = "flex";
-  nftHeading.style.display = "none";
   backArrow.style.display = "block";
   amountToPurchase.textContent = counterValue.textContent;
   let price = parseFloat(priceSpan[0].textContent);
@@ -71,7 +72,7 @@ backArrow.addEventListener("click", goBack)
 function goBack(){
   purchaseScreen.style.display = "none";
   backArrow.style.display = "none";
-  nftHeading.style.display = "flex";
+  //nftHeading.style.display = "flex";
 
   orderScreen.style.display = "grid"
 }
@@ -132,10 +133,11 @@ async function getUser(img){
     .then(data=> {
       let targetUser;
       let users = data;
-       users.filter((user)=>{
-        user.login ? targetUser = user: null;
+      targetUser =  users.filter((user)=>{
+        return user.login
       })
-      const postLoggedInUser = new httpRequest('http://localhost:5000/users', targetUser.username, img, targetUser.password, parseInt(counterValue.textContent) )
+      console.log(targetUser)
+      const postLoggedInUser = new httpRequest('http://localhost:5000/users', targetUser[0].username, img, targetUser[0].password, parseInt(counterValue.textContent) )
 
       postLoggedInUser.nftPostPurchasesRequest(price, header, "buy")
     })

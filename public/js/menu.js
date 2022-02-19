@@ -2,11 +2,12 @@ const signUpBtn = document.getElementById('sign-up')
 const loginButton = document.getElementById('login-btn');
 const profile = document.getElementById('profile');
 const container = document.getElementById('container');
+const accountSettings= document.querySelector('.settings-list')
 container.addEventListener("click", showProfileSettings)
 container.addEventListener('click', signOut);
 //container.addEventListener('click', updateProfile);
 container.addEventListener('click', updateChangeRequest);
-
+container.addEventListener("click", showSettings)
 const accountState = {
   signedIn : false
 
@@ -40,7 +41,7 @@ function showLoginStatus(){
         console.log("show")
         signUpBtn.style.display = "none";
             loginButton.style.display = "none";
-            profile.style.display = "block" 
+            profile.style.display = "flex" 
         console.log(profile);
 
             //const img = document.getElementById('profile-image-display');
@@ -90,6 +91,10 @@ function showLoginStatus(){
         accountNav.style.display = "flex";
       }else{
         accountNav.style.display = "none";
+        accountSettings.style.display = "none";
+        const accountButton = document.getElementById("account-settings")
+        accountButton.classList.remove("visible")
+
   
       }
       
@@ -119,7 +124,22 @@ function signOut(e){
   }
 }
 
+function showSettings(e){
+  if(e.target.id === "account-settings"){
+    if(e.target.classList.contains("visible")) {
+      accountSettings.style.display = "none";
+      e.target.classList.remove("visible");
+   // document.documentElement.style.setProperty('--site-settings-list-margin', '-20px');
+      
+    }else{
+      accountSettings.style.display = "flex";
+     // document.documentElement.style.setProperty('--site-settings-list-margin', '-90px');
+      e.target.classList.add("visible");
+    }
+   
 
+  }
+}
 
 
 function updateChangeRequest(e){
@@ -131,17 +151,22 @@ function updateChangeRequest(e){
       const sendData = new httpRequest("http://localhost:5000/users/change-request")
       console.log(e.target.id)
       if(e.target.id === "change-profile-image" ){
+
         sendData.sendProfileSettings(true)
       }else if(e.target.id === "change-username"){
         sendData.sendProfileSettings(null, true)
   
-      }else{
+      }else if(e.target.id === "delete-user"){
+        console.log("sending");
+        sendData.sendProfileSettings(null, null, null, true)
+      }
+      else{
         sendData.sendProfileSettings(null, null,  true)
   
       }
   
       console.log("running")
-      window.location.href = 'changeAccountSettings.html';
+   window.location.href = 'changeAccountSettings.html';
   
     }
   }

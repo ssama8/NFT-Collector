@@ -8,6 +8,11 @@ const profileGallery = document.querySelector('.profile-icon-container');
 const togglePassword = document.querySelectorAll('.eye');
 profileGallery.style.display = "none";
 
+
+let username,
+  newpassword;
+
+
 togglePassword.forEach((eye)=>{
   eye.addEventListener("click", togglePasswordVisibility)
 })
@@ -16,18 +21,6 @@ createAccount.addEventListener('click', addUser)
 container.addEventListener('click', pickIcon);
 container.addEventListener('click', sendPostRequest)
 let userDetails = [];
-
-function sendPostRequest(e){
-  const selection = document.querySelector('.selected-profile');
-  if(e.target.id === 'finish-sign-up'&& selection){
-    userDetails.push(selection.src);
-    postUser(userDetails[0], userDetails[1], userDetails[3])
-
-    console.log("send post request");
-    console.log(window.location.href);
-    window.location.href = "index.html"
-  }
-}
 
 function pickIcon(e){
 
@@ -110,6 +103,7 @@ function addUser(e){
         console.log(testingUsername);
         if(testingUsername){
           if(userName.length >=6){
+            username = userName
             checkIfPasswordsMatch(password, confirmPassword )
 
           }else{
@@ -153,8 +147,8 @@ function removeErrorMessage(div){
   div.remove();
 }
 const passwordSrength = document.querySelector('.password-strength');
-passwordSrength.style.display = "none";
-passwordInput.addEventListener('input', checkStrength);
+//passwordSrength.style.display = "none";
+//asswordInput.addEventListener('input', checkStrength);
 
 
 function checkIfPasswordsMatch(password, passwordConfirmation){
@@ -164,32 +158,62 @@ function checkIfPasswordsMatch(password, passwordConfirmation){
     createErrorMessage(message)
   }else{
     // userDetails.push(accountInfo)
-    console.log("success")
+    const containsNum = /\d/;
+    const valid = containsNum.test(password);
+    if(valid){
+      if(password.length< 8){
+        createErrorMessage("password must have atleast eight characters")
 
-     signinForm.style.display = "none";
-     populateGallery();
+      }else {
+        console.log("success")
+        newpassword = password
+        signinForm.style.display = "none";
+        populateGallery();
+      }
+
+    }
+    else{
+      createErrorMessage("password must have atleast one number")
+
+    }
+   
 
   }
 }
 
-function checkStrength(e){
-  passwordSrength.style.display = "block";
-}
-const defaultDisplay = function(e){
-  passwordSrength.style.display = "none";
+// function checkStrength(e){
+//   passwordSrength.style.display = "block";
+// }
+// const defaultDisplay = function(e){
+//   passwordSrength.style.display = "none";
   
+// }
+
+//passwordInput.addEventListener('blur', defaultDisplay);
+
+
+
+function sendPostRequest(e){
+  const selection = document.querySelector('.selected-profile');
+  if(e.target.id === 'finish-sign-up'&& selection){
+    
+    postUser(selection.src)
+
+    console.log("send post request");
+    console.log(window.location.href);
+    window.location.href = "index.html"
+  }
 }
 
-passwordInput.addEventListener('blur', defaultDisplay);
- async function postUser(userName, password, image){
-  console.log(userName); console.log(image);
+ async function postUser(image){
+  console.log(username); console.log(newpassword);
   const rawResponse =  await fetch('http://localhost:5000/users', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({username: userName, password: password, profilePic : image})
+    body: JSON.stringify({username: username, password: newpassword, profilePic : image})
   })
 
 

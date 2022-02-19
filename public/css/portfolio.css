@@ -8,24 +8,23 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  margin-top: 100px;
 }
 .portfolio-container h1 {
   margin: 0 0 1rem 0;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 hr {
-  border: 5px solid black;
+  border: 2px solid black;
   width: 80%;
 }
 .profile {
   margin-top: 1rem;
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 .portfolio-gallery-container {
   /* border: 2px solid black; */
-  padding: 2rem;
+  padding: 1rem;
   width: 80%;
 
   text-align: center;
@@ -70,8 +69,8 @@ hr {
 .login,
 .login-add-page .login {
   padding: 2rem;
-  margin-top: 100px;
   height: 100vh;
+  margin-top: -100px;
   color: white;
   position: relative;
   font-weight: bold;
@@ -81,9 +80,21 @@ hr {
   align-items: center;
   flex-direction: column;
 }
-.login-add-page .login {
+.login h2 {
+  font-size: 2rem;
 }
-
+.login p {
+  margin: 1rem 0;
+  font-size: 1.25rem;
+}
+.login a {
+  color: white;
+  background-color: rgb(20, 42, 116);
+  margin: 0 auto;
+  width: 20%;
+  text-align: center;
+  padding: 1rem 0;
+}
 .login::before {
   content: "";
   position: absolute;
@@ -105,7 +116,7 @@ a {
 }
 
 .net-worth {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1.25rem;
 }
 
@@ -118,20 +129,20 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(251, 248, 16);
+  background-color: rgb(162, 228, 240);
   z-index: 100;
   height: 800px;
   width: 800px;
   border-radius: 10px;
-  padding: 1rem;
 }
 .sell-screen {
   display: none;
+  z-index: 1;
 }
 
 .sell-screen img {
-  height: 400px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
   margin: 1rem 0;
 }
 .sell-screen h3,
@@ -147,6 +158,9 @@ a {
 }
 .sell-nft {
   margin-top: 1rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 60%;
 }
 
 .add-to-portfolio {
@@ -155,7 +169,7 @@ a {
   align-items: center;
 }
 .add-to-portfolio a {
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   background-color: black;
   font-weight: bold;
   font-size: 1.25rem;

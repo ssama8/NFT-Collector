@@ -58,3 +58,18 @@
 /* .validate-login {
   display: none;
 } */
+.confirmation {
+  color: black;
+  text-align: center;
+  display: none;
+}
+.confirmation input {
+  display: inline;
+  width: fit-content;
+  margin: 1rem 0.25rem;
+}
+.choices {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

@@ -69,17 +69,26 @@ async changeProfileSettings ( image, username, password ){
     body: JSON.stringify({url: image, newusername: username, newpassword: password})
   })
 }
-async sendProfileSettings ( image, username, password ){
+async sendProfileSettings ( image, username, password, remove ){
   const changeProfileSettings = await fetch(this.url,  {
     method: 'PATCH',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({profileImage: image, username: username, password: password})
+    body: JSON.stringify({profileImage: image, username: username, password: password, remove: remove })
   })
 }
-
+async deleteAccount (  username ){
+  const changeProfileSettings = await fetch(this.url,  {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    // body: JSON.stringify({ username: username})
+  })
+}
 }
 
 // async function checkInfo(status){

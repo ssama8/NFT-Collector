@@ -1,4 +1,5 @@
 import express from 'express';
+
 const router = express.Router();
 
 import users from './accounts.js'
@@ -49,19 +50,22 @@ router.get('/placeorder', (req, res)=>{
 const changeSetting = {
   profileImage: null,
   password: null,
-  username: null
+  username: null,
+  remove: null
 }
 router.get('/change-request', (req, res)=>{
   res.send(changeSetting)
 })
 router.patch('/change-request', (req, res)=>{
-  const {profileImage, password, username} = req.body;
+  const {profileImage, password, username, remove} = req.body;
   for(const key in changeSetting){
     changeSetting[key] = null;
   }
+  console.log(remove)
   if(profileImage) changeSetting.profileImage = "change"
   else if (password) changeSetting.password = "change"
   else if(username)changeSetting.username = "change";
+  else if(remove) changeSetting.remove = "change";
   else res.send("can't update profile state")
 
   res.send("updated")
@@ -79,17 +83,34 @@ router.patch('/:username', (req,res)=>{
   const findUser = users.find((user)=> user.username === username)
   // if(username === placeOrder) res.send(nftToOrder)
   if(!findUser) res.send("error 404 page not found")
-  console.log(findUser);
+ // console.log(findUser);
   if(url){
     findUser.profilePic = url;
 
   }else if(newpassword){
     
     findUser.password = newpassword
+  }else if (newusername){
+    findUser.username = newusername
+
   }
   
-  console.log(findUser.password);
-  res.send(findUser.password)
+  console.log(findUser.username);
+  res.send(findUser.username)
+})
+router.delete('/:username', (req, res)=>{
+  const {username} = req.params;
+  const findUser = users.find((user)=> user.username === username)
+  const index = users.indexOf(findUser)
+  console.log(index)
+  if(!findUser) res.send("error 404 page not found")
+  users.splice(index, 1);
+  
+  
+  res.send(`user ${findUser.username} has been deleted from the database`)
+  
+
+
 })
 router.post('/placeorder', (req, res)=>{
    const {username, url} = req.body;
@@ -109,7 +130,21 @@ console.log(req.body)
   res.send(`User with the username of ${username} has decided to look at the nft with the url ${url}`);
   
 })
+// {
+//   username: "ssama2",
+//   password : "hidethisplease",
+//   login: false,
+//   profilePic: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-4.png",
+//   purchasedItems :[{url: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-4.png",
+//   price: "2.3 million",
+//   quantity: 8,
+//   name: "Bored Ape #2087"
+  
+// }
 
+// ],
+// images: imageCopy
+// }
 router.post('/', (req, res)=>{
   const newUser = req.body;
   const checkExisting = users.filter((user)=>{
@@ -118,9 +153,10 @@ router.post('/', (req, res)=>{
     }
   })
 
-
+  console.log(req.body);
   console.log(checkExisting)
-
+  newUser.purchasedItems = [];
+  newUser.images = images;
    if(checkExisting.length === 0) users.push(newUser)
   res.send(`User with the user name of ${newUser.username} was added to the database`);
  // res.send(JSON.parse(req.body));
@@ -144,9 +180,13 @@ router.patch('/', (req, res)=>{
 
  // console.log(index);
   //users[index].login = login;
+  
   if(req.body.purchasedItem!== undefined){
   
    let allPurchases = users[index].purchasedItems;
+  //  if(allPurchases === []){
+  //    allPurchases.push(req.body)
+  //  }
    allPurchases.map((purchase, index)=>{
      if(purchase.url === req.body.purchasedItem[0].url){
        console.log('huhuhuhuhhuhu')

@@ -117,26 +117,26 @@ function buyNFT(e){
 
 
 
-function updateChangeRequest(e){
-//  console.log(e.target.classList)
-  if(e.target.classList.contains("change-request")){
-  e.preventDefault()
+// function updateChangeRequest(e){
+// //  console.log(e.target.classList)
+//   if(e.target.classList.contains("change-request")){
+//   e.preventDefault()
 
-    console.log('update settings')
-    const sendData = new httpRequest("http://localhost:5000/users/change-request")
-    console.log(e.target.id)
-    if(e.target.id === "change-profile-image" ){
-      sendData.sendProfileSettings(true)
-    }else if(e.target.id === "change-username"){
-      sendData.sendProfileSettings(null, true)
+//     console.log('update settings')
+//     const sendData = new httpRequest("http://localhost:5000/users/change-request")
+//     console.log(e.target.id)
+//     if(e.target.id === "change-profile-image" ){
+//       sendData.sendProfileSettings(true)
+//     }else if(e.target.id === "change-username"){
+//       sendData.sendProfileSettings(null, true)
 
-    }else{
-      sendData.sendProfileSettings(null, null,  true)
+//     }else{
+//       sendData.sendProfileSettings(null, null,  true)
 
-    }
+//     }
 
-    console.log("running")
-    window.location.href = 'changeAccountSettings.html';
+//     console.log("running")
+//     window.location.href = 'changeAccountSettings.html';
 
-  }
-}
+//   }
+// }

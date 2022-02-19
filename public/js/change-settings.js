@@ -2,12 +2,14 @@
 const container = document.querySelector('.change-account-settings')
 container.addEventListener('click', pickIcon);
 container.addEventListener('click', updatePassword);
+const confirmation = document.querySelector('.confirmation')
 
 const profileImages = document.querySelector('.profile-icon-container');
 const signinForm = document.querySelector('.change-details')
 const getState = new httpRequest('http://localhost:5000/users/change-request')
 getState.getRequest()
 .then(settings=>{
+  console.log(settings);
   if(settings.profileImage){
   populateGallery();
 
@@ -15,6 +17,23 @@ getState.getRequest()
     signinForm.style.display = "none";
   }else{
     container.addEventListener("click", changeLogin)
+    const usernameLabel = document.getElementById('username-label')
+    const passwordLabel = document.getElementById('password')
+    const changeBtn = document.querySelector('#change-parameter')
+    if(settings.username){
+   
+
+      usernameLabel.textContent = "Enter your old username";
+      passwordLabel.textContent = "Enter your password";
+      changeBtn.value = "Confirm account"
+    }
+    if(settings.remove){
+      console.log("delete account");
+      usernameLabel.textContent = "Enter your username";
+      passwordLabel.textContent = "Enter your password";
+      changeBtn.value = "Confirm account"
+      
+    }
   }
 })
 function showImages(){
@@ -119,13 +138,13 @@ function patch(user, url){
   getUserInfo.changeProfileSettings(url);
   window.location.href = 'index.html';
 }
-
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
 
 function changeLogin(e){
-  if(e.target.id === "change-parameter"){
+  if(e.target.id === "change-parameter" && !e.target.classList.contains('patch-username')&& !e.target.classList.contains('delete-account')){
     e.preventDefault()
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
+   
     console.log(usernameInput.value, passwordInput.value )
     if(usernameInput.value !=='' && passwordInput.value != ''){
       checkIfValid(usernameInput.value, passwordInput.value);
@@ -181,9 +200,47 @@ function checkIfValid(username, password){
    
    if(user[0].username === username && user[0].password === password){
      console.log("valid")
-     formDiv.style.display = "none"
-     formDiv.classList.add("hidden");
-     changePassword.style.display = "block"
+     getState.getRequest()
+     .then(update=>{
+       console.log(update)
+       if(update.password){
+        formDiv.style.display = "none"
+        formDiv.classList.add("hidden");
+        changePassword.style.display = "block"
+       }else{
+        const changeBtn = document.getElementById("change-parameter");
+
+         if(update.remove){
+         const copyBtn = changeBtn;
+         changeBtn.remove()
+         passwordInput.disabled = true;
+         usernameInput.disabled = true;
+            confirmation.style.display = "block";
+            copyBtn.value = "Delete Account";
+
+            copyBtn.classList.add("delete-account")
+            formDiv.appendChild(copyBtn);
+         }else{
+          passwordInput.disabled = true;
+          usernameInput.disabled = true;
+          const label = document.createElement('label');
+          label.for = "new-username"
+          label.textContent = "Enter new username"
+          const changeUsername = document.createElement('input');
+          changeUsername.type = "text";
+         changeUsername.id = "new-username";
+         const copyBtn = changeBtn;
+         copyBtn.value = "Change Username"
+         copyBtn.classList.add("patch-username")
+         formDiv.appendChild(label);
+         formDiv.appendChild(changeUsername)
+         formDiv.appendChild(copyBtn);
+         }
+      
+        
+       }
+     })
+   
    }else{
      console.log("wrong username or password")
     createErrorMessage("wrong username or password")
@@ -204,8 +261,7 @@ function updatePassword(e){
 
     if(passwordInput.value !=='' && confirmPasswordInput.value !== ''){
         if(passwordInput.value !== confirmPasswordInput.value){
-          console.log(passwordInput.value, confirmPasswordInput.value)
-          console.log("test")
+      
           createErrorMessage("Passwords don't match", passwordLabel)
 
         }else{
@@ -235,4 +291,82 @@ function updatePassword(e){
     }
   }
 
+}
+
+container.addEventListener("click", patchUsername)
+
+function patchUsername(e){
+  if(e.target.classList.contains("patch-username")){
+    e.preventDefault();
+    console.log("update username ")
+    const newUsername = document.getElementById("new-username")
+    if(newUsername.value!== ''){
+      checkIfUsernameValid(newUsername.value)
+    }else{
+      createErrorMessage("Fill out all fields")
+    }
+  }
+
+}
+
+
+function checkIfUsernameValid(username){
+  const checkNumber = /\d/;
+  const hasNumber = checkNumber.test(username);
+  if(hasNumber){
+      if(username.length <6) {
+        createErrorMessage("New username must have atleast six characters")
+      }else{
+        getLoggedInUser.getRequest()
+        .then(users=>{
+          const filtered = users.filter((user)=>{
+            return user.username === username
+          })
+          if(filtered.length!== 0){
+            console.log("Username is already Taken ")
+            createErrorMessage("Username is already Taken ")
+          }else{
+          getUser()
+          .then(user=>{
+            const setUsername = new httpRequest(`http://localhost:5000/users/${user[0].username}`)
+            setUsername.changeProfileSettings(null, username, null);
+            window.location.href = "index.html"
+          })
+        
+            
+          }
+        })
+      }
+  }else[
+    createErrorMessage("New username must have atleast one number")
+  ]
+}
+
+container.addEventListener("click", removeAccount)
+function removeAccount(e){
+  if(e.target.classList.contains('delete-account')){
+    e.preventDefault();
+    const confirmDelete = document.getElementById("confirm-delete");
+    const dontDelete = document.getElementById("dont-delete");
+    console.log(confirmDelete.checked, dontDelete.checked)
+    if(!confirmDelete.checked && !dontDelete.checked){
+      createErrorMessage("Please check yes or no")
+    }else{
+      if(dontDelete.checked){
+        window.location.href = "index.html"
+      }else{
+        getUser()
+        .then(user=>{
+          const deleteAccount = new httpRequest(`http://localhost:5000/users/${user[0].username}`)
+          deleteAccount.deleteAccount();
+          //setUsername.changeProfileSettings(null, username, null);
+
+          window.location.href = "index.html"
+        })
+        
+
+      }
+    }
+    console.log("Remove Account");
+  }
 }
