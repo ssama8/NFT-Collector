@@ -1,0 +1,170 @@
+body {
+  /* background-color: orange;
+  opacity: 0.1; */
+}
+
+#gallery {
+  /* margin-top: 3rem;
+  display: grid; */
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-gap: 4rem;
+  padding: 2rem;
+  max-width: var(--website-width);
+  margin: 0 auto; */
+}
+
+/* #container #header #navbar #long-heading {
+  font-size: 1rem;
+} */
+.gallery-pic img {
+  height: 200px;
+  width: 200px;
+}
+.buy-nft {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+@media screen and (max-width: 900px) {
+  /* body {
+    background-color: green;
+    opacity: 0.1;
+  } */
+  /* #navbar ul.menu a {
+    margin: 0 1rem;
+  } */
+  #navbar {
+    max-width: var(--website-width);
+    margin: 0 auto;
+    display: grid;
+    height: 100px;
+    grid-template-columns: 3fr 2fr;
+  }
+  .gallery-pic img {
+    height: 150px;
+    width: 150px;
+  }
+  .gallery-pic p {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  #gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  #account-btns {
+    height: 75px;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+  }
+  #navbar {
+    height: fit-content;
+    padding: 0.25rem;
+    grid-template-columns: repeat (2, 1fr);
+  }
+  #navbar > ul {
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+  .gallery-pic img {
+    height: 250px;
+    width: 250px;
+  }
+  .buy-nft {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 680px) {
+  .gallery-pic img {
+    height: 200px;
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #navbar {
+    height: fit-content;
+    padding: 0.25rem;
+    grid-template-columns: 1fr;
+    padding-bottom: 1rem;
+  }
+  .gallery-pic img {
+    height: 150px;
+    width: 150px;
+  }
+  .alert .header {
+    padding: 0.5rem;
+  }
+  .alert h3 {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .relative-layer .body {
+    padding: 0.5rem;
+  }
+  .body p {
+    font-size: 1rem;
+  }
+  .footer button {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  #navbar > ul {
+    margin: 0 auto;
+    margin-bottom: 0rem;
+  }
+  .showcase-description :nth-child(2) {
+    display: none;
+  }
+  #navbar {
+    padding-bottom: 0rem;
+  }
+
+  #navbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #navbar ul.menu a {
+    color: white;
+    font-size: 1.25rem;
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    margin: 0 1rem;
+  }
+  #account-btns {
+    padding-bottom: 0.25rem;
+  }
+  #account-btns img {
+    width: 75px;
+    height: 75px;
+  }
+  #account-btns > * {
+    margin: 0.5rem 0;
+  }
+  #account-btns > * {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  #gallery {
+    grid-template-columns: 1fr;
+  }
+  .gallery-pic img {
+    height: 300px;
+    width: 300px;
+  }
+  .buy-nft {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.5rem;
+  }
+}
