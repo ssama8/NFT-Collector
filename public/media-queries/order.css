@@ -1,0 +1,246 @@
+.nft-to-buy {
+  width: 300px;
+  height: 300px;
+}
+.image-heading h3 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.nft-license-background p {
+  margin: 1rem 0;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  font-weight: bold;
+}
+.nft-license-background h3 {
+  font-size: 2rem;
+}
+.decrement,
+.increment {
+  background-color: red;
+  height: 30px;
+  width: 40px;
+}
+.quantity {
+  font-size: 2.5rem;
+}
+
+.subtract-sign,
+.vertical-sign {
+  width: 30px;
+}
+.increment .subtract-sign {
+  position: absolute;
+  top: 11px;
+  left: 4px;
+  width: 30px;
+}
+
+.vertical-sign {
+  width: 20px;
+  top: 11px;
+  left: 9px;
+}
+
+.purchase-screen h3 {
+  font-size: 3rem;
+}
+.purchase-screen h4 {
+  font-size: 1.75rem;
+  margin: 2rem 0;
+}
+.purchase-screen h5 {
+  font-size: 1.25rem;
+  margin: 2rem 0;
+}
+/* .purchase-screen p {
+  margin-bottom: 2rem;
+} */
+.purchase-screen img {
+  height: 250px;
+  width: 250px;
+  margin-bottom: 3rem;
+  cursor: pointer;
+}
+
+.order-summary {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  width: 46%;
+  margin-top: 1rem;
+  margin: 1rem auto;
+  font-weight: bold;
+}
+.nft-container {
+  margin-top: 2rem;
+}
+
+/* .menu-screen {
+} */
+.menu-screen h3 {
+  max-width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+  /* * {
+    background-color: red;
+  } */
+  .nft-pic {
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .container-2 h1 {
+    font-size: 3rem;
+  }
+  .nft-to-buy {
+    width: 250px;
+    height: 250px;
+  }
+  .image-heading h3 {
+    font-size: 2.15rem;
+    margin-bottom: 1rem;
+  }
+  .nft-license-background p {
+    font-size: 1.15rem;
+  }
+  .nft-license-background h4,
+  .nft-license-background h3 {
+    font-size: 1.75rem;
+  }
+  .quantity {
+    font-size: 2rem;
+  }
+  .decrement,
+  .increment {
+    background-color: red;
+    height: 25px;
+    width: 35px;
+    /* display: flex;
+  align-items: center;
+  border: 2px solid black;
+  cursor: pointer;*/
+  }
+  .subtract-sign,
+  .vertical-sign {
+    width: 25px;
+  }
+  .increment .subtract-sign {
+    top: 8.5px;
+    left: 1px;
+    width: 30px;
+  }
+
+  .vertical-sign {
+    width: 20px;
+    top: 8.5px;
+    left: 6px;
+  }
+  .nft-container .place-order {
+    margin: 1rem 0;
+    padding: 0;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .counter {
+    display: flex;
+    justify-content: center;
+  }
+  /* 
+  .purchase-screen h3 {
+    font-size: 3rem;
+  }
+  .purchase-screen h4 {
+    font-size: 1.75rem;
+    margin: 2rem 0;
+  }
+  .purchase-screen h5 {
+    font-size: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .purchase-screen img {
+    height: 250px;
+    width: 250px;
+    margin-bottom: 3rem;
+    cursor: pointer;
+  }
+
+  .order-summary {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    width: 46%;
+    margin-top: 1rem;
+    margin: 1rem auto;
+    font-weight: bold;
+  } */
+}
+
+@media screen and (max-width: 660px) {
+  .purchase-screen h3 {
+    font-size: 2rem;
+  }
+  .purchase-screen h4 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  .purchase-screen h5 {
+    font-size: 1.15rem;
+    margin: 1rem 0;
+  }
+  /* .purchase-screen p {
+    margin-bottom: 2rem;
+  } */
+  .purchase-screen img {
+    height: 250px;
+    width: 250px;
+    margin-bottom: 3rem;
+    cursor: pointer;
+  }
+
+  .order-summary {
+    font-size: 1.5rem;
+    width: 60%;
+    line-height: 1.3;
+    margin-top: 1rem;
+    margin: 1rem auto;
+    font-weight: bold;
+  }
+  /* .nft-to-buy {
+    width: 225px;
+    height: 225px;
+  }
+  .nft-license-background p {
+    font-size: 1rem;
+  }
+  .nft-container .place-order {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .place-order > p {
+    font-size: 1.5rem;
+    padding: 0rem;
+    margin: 0rem;
+  } */
+}
+@media screen and (max-width: 600px) {
+  #container h1 {
+    font-size: 2.5rem;
+  }
+  .nft-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90vh;
+  }
+  .purchase-screen h4 {
+    display: none;
+  }
+}

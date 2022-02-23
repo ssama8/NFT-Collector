@@ -18,9 +18,6 @@ const alertLayer = document.querySelector(".relative-layer")
 
 
 
-//On the exit button on the alert to remove the alert message
-container.addEventListener("click", removeAlert)
-
 
 /*Get Request to server ran initially, to look for a logged in user.  */
 const checkLogin = new httpRequest("http://localhost:5000/users")
@@ -92,34 +89,33 @@ container.addEventListener('click', orderNFT);
 
 function orderNFT(e){
   if(e.target.classList.contains("buy-nft")){
-
+    //Variable from the menu.js file that stores wheter an account is signed in or not, if there is nobody signed in the show the custom alert that you have to sign up or login to order nfts. 
     if(!accountState.signedIn){
-
     showAlert();
-
-  
-    }else{
-      console.log(accountState)
-   
-      let siblingElements = [...e.target.parentElement.childNodes]
-      let img = siblingElements.filter((node)=>{
+    }
+    //Send the order request with the correct information 
+    else{
+      //Gets the sibling elements to pass in the data like the header content, image src, etc...
+      const siblingElements = [...e.target.parentElement.childNodes]
+      const img = siblingElements.filter((node)=>{
         return node.classList.contains("showcase")
       })
   
     const url = img[0].src
-
+    //Instantiating a new httpRequest with the username of the user and the source of the nft image needed to display the correct NFT on the order page
    const nftToOrder = new httpRequest("http://localhost:5000/users/placeorder", currentUser[0].username, url )
-    nftToOrder.nftOrderPostRequest();  
+
+   nftToOrder.nftOrderPostRequest();  
 
  
-    //   window.location.href = "http://localhost:5000/order.html"
+       window.location.href = "http://localhost:5000/order.html"
     }
  
   }
 }
 
 
-
+/*Shows the alert at the center of the window and covers the screen so that nothing can be done untill the user exits the alert*/
 function showAlert(){
  alertLayer.style.display = "block";
 
@@ -138,6 +134,11 @@ function showAlert(){
 
   alertOverlay.style.top = `${0}px`
 }
+
+
+
+//On the exit button on the alert to remove the alert message
+container.addEventListener("click", removeAlert)
 
 function removeAlert(e){
   if(e.target.id === "remove-alert"){
