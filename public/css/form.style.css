@@ -24,40 +24,42 @@ body {
   z-index: 1;
 }
 
-.grid {
-  display: grid;
+.flex {
+  display: flex;
   margin: 0 auto;
-  grid-template-columns: repeat(2, 1fr);
-  width: 1400px;
-  height: 500px;
+  justify-content: center;
+  align-items: center;
+
+  /* width: 1400px; */
+  /* height: 500px; */
   z-index: 100;
 }
 .sign-up,
-.login {
+.login-form {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem 4rem;
   position: relative;
   z-index: 100;
   color: rgb(0, 0, 0);
-  border: 1px solid black;
-  border-radius: 5px;
 }
 
 .sign-up:before,
-.login:before {
+.login-form:before {
   content: "";
   position: absolute;
   height: 100%;
   top: 0;
   left: 0;
   width: 100%;
+  border-radius: 50px;
+
   background-color: rgb(197, 52, 52);
   opacity: 0.9;
 }
 .sign-up input,
-.login input {
+.login-form input {
   margin: 1rem 0;
   padding: 0.75rem;
   position: relative;
@@ -65,14 +67,15 @@ body {
   width: 100%;
 }
 .sign-up h3,
-.login h3 {
+.login-form h3 {
   font-size: 2rem;
   z-index: 100;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
 }
 .sign-up label,
 .password-strength,
-.login label {
+.login-form label {
   font-size: 1.25rem;
   z-index: 100;
 }
