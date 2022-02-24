@@ -119,7 +119,7 @@ async function getRequest(userName){
     return userExists
 
   })
- // .then(data=> console.log(data));
+
 
   return request
 }

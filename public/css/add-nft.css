@@ -52,7 +52,8 @@ hr {
 .preview-nft {
   display: none;
 }
-.preview-btn {
+.preview-btn,
+.redirect {
   font-size: 1.25rem;
   font-weight: bold;
   color: rgb(63, 63, 63);
