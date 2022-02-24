@@ -6,17 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/de9b8a8f63.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/form.style.css">
+  <link rel="stylesheet" href="./media-queries/signup-form-images.css" media = "screen and (max-width: 900px) ">
   <title>Document</title>
 </head>
 <body>
   <div class="background">
-    <div class="profile-icon-container">
-      <h3>Select A Profile Icon</h3>
-      <div class="gallery-container">
-     
+    <div class="images-container">
+      <div class="profile-icon-container">
+        <h3>Select A Profile Icon</h3>
+        <div class="gallery-container"></div>
+      <button class ="btn" id="finish-sign-up">Set Profile Image</button>
+      </div>
     </div>
-    <button class ="btn" id="finish-sign-up">Set Profile Image</button>
-    </div>
+  
     <div class="flex">
       <form action="" class="sign-up">
         <h3> Welcome To NFT Collector</h3>
@@ -28,25 +30,20 @@
         <label for="passowrd">Create a Passowrd: </label>
         <div class="password-container">
           <input type="password" name="password" id="password">
-          <div class="eye" id = "create">
-            <div class="pupil"></div>
+          <div class="eye toggle" id = "password-toggle">
+            <div class="pupil toggle" id = "inner-password-toggle"></div>
           </div>
           <div class="slash" id = "slash-password"></div>
         </div>
-        <!-- <div class="password-strength">
-          <h4>Password strength</h4>
-          <div class="strength-meter">
-            <div class="meter"></div>
-          </div>
-        </div> -->
+
        
         
         <label 
         for="confirm-password">Confirm Password: </label>
         <div class="confirm-password-container">
           <input type="password" name="confirm-password" id="confirm-password">
-          <div class="eye" id = "confirm">
-            <div class="pupil"></div>
+          <div class="eye toggle" id = "confirm">
+            <div class="pupil toggle"></div>
           </div>
           <div class="slash" id = "slash-confirm"></div>
         </div>

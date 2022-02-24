@@ -1,21 +1,6 @@
-body {
-  /* background-color: orange;
-  opacity: 0.1; */
-}
-
 #gallery {
-  /* margin-top: 3rem;
-  display: grid; */
   grid-template-columns: repeat(3, 1fr);
-  /* grid-gap: 4rem;
-  padding: 2rem;
-  max-width: var(--website-width);
-  margin: 0 auto; */
 }
-
-/* #container #header #navbar #long-heading {
-  font-size: 1rem;
-} */
 .gallery-pic img {
   height: 200px;
   width: 200px;

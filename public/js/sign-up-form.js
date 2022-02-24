@@ -1,53 +1,35 @@
+//container elements that hold other elements used for exent delegation 
 const container = document.querySelector('.background');
 const signinForm = document.querySelector('.sign-up');
-const createAccount = document.getElementById('btn');
+
+//The different form input elements
 const userNameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
-const confirmInput = document.getElementById('confirm-password');
-const profileGallery = document.querySelector('.profile-icon-container');
-const togglePassword = document.querySelectorAll('.eye');
+const confirmInput = document.getElementById('confirm-password')
+
+//Button that sends post request to create the account 
+const createAccount = document.getElementById('btn');
+
+//The div that holds the profile image options which is inititally hidden 
+const profileGallery = document.querySelector('.images-container');
 profileGallery.style.display = "none";
 
+//The eyes that can be clicked to toggle the password visibility 
+const togglePassword = document.querySelectorAll('.toggle');
+
+//Variables used later to send the post request 
 
 let username,
   newpassword;
 
 
+  //adding the togglePasswordVisibilty function on click for all of the elements with a class of toggle 
 togglePassword.forEach((eye)=>{
   eye.addEventListener("click", togglePasswordVisibility)
 })
-
-createAccount.addEventListener('click', addUser)
-container.addEventListener('click', pickIcon);
-container.addEventListener('click', sendPostRequest)
-let userDetails = [];
-
-function pickIcon(e){
-
-  if(e.target.classList.contains('profile-option')){
-    const previousSelection = document.querySelector('.selected-profile');
-  
-    if(previousSelection){
-      previousSelection.classList.remove('selected-profile');
-     
-    }else{
-      if(e.target.classList.contains('selected-profile')){
-        console.log('firing');
-        e.target.classList.remove('selected-profile');
-        console.log(e.target.classList);
-      }else{
-        e.target.classList.add('selected-profile')
-      }
-     
-
-    }
-   
-  }
-  
-}
-
+//figures out which input needs to be toggles and calls the toggleSpeccifiedInput function with the specific input
 function togglePasswordVisibility(e){
-  if(e.target.id === "create"){
+  if(e.target.id === "password-toggle" || e.target.id === "inner-password-toggle"){
     toggleSpecifiedInput(passwordInput, "slash-password")
   }else{
     toggleSpecifiedInput(confirmInput, "slash-confirm");
@@ -55,83 +37,101 @@ function togglePasswordVisibility(e){
   
 }
 function toggleSpecifiedInput(input, strikethrough){
+  //Will only toggle if there is atleast one character in the input
   if(input.value.length >0){
-    console.log('toggle');
-    console.log(input.type);
+    //gets the slash thats passed in 
     const slash = document.querySelector(`#${strikethrough}`);
     const type = input.type;
+    //If the type is currently password or hidden, then change it to text and make it visible and vice versa. 
     if(type === "password"){
       input.type = "text"
       slash.style.display = "block";
     }else{
       input.type = "password"
       slash.style.display = "none";
-  
     }
   }
-
-
 }
-let taken;
+//calls the calidateInputs function when the submit button is clicked
+createAccount.addEventListener('click', validateInputs)
 
-function addUser(e){
-  console.log(e.target);
+function validateInputs(e){
   e.preventDefault();
+  //sets the userName, password, and comfirmPassword to the input value that matches
   const userName = userNameInput.value
   const password = passwordInput.value
   const confirmPassword = confirmInput.value
-  console.log(userName, password, confirmPassword);
-  if(userName != '' && password != '' && confirmPassword != ''){
+  //if all of the fields are filled out
+  if(userName !== '' && password !== '' && confirmPassword !== ''){
+    //calls the getRequest function with the username to see if it's already taken
+  getRequest(userName)
+  .then(userExists=>{
+    //If the user exists than create error that the username can't be used. 
+    if(userExists){createErrorMessage("Username has already been taken")}
+    else{
+      //checks if the username has atleast one number
+      const containsNum = /\d/;
+      const testingUsername = containsNum.test(userName);
+      //runs if the username has atleast one number
+      if(testingUsername){
 
-    const parameters = [userName, password, confirmPassword]
-  const checkExisting = getRequest()
-  .then(users=> {
-    users.map((user)=>{
-      if(user.username === userName){
-        console.log('this username is already taken')
-        taken = true;
-        let message = `${userName} is already taken please make another one`;
-        createErrorMessage(message);
-      }
-    })
-      console.log(taken);
-      if(taken){
-        return
-      }else{
-        const containsNum = /\d/;
-        const testingUsername = containsNum.test(userName);
-        console.log(testingUsername);
-        if(testingUsername){
-          if(userName.length >=6){
-            username = userName
-            checkIfPasswordsMatch(password, confirmPassword )
-
-          }else{
-            createErrorMessage("Username must be atleast 6 characters")
-          }
-        }else{
-          const message = "Username Must Have Atleast one number"
-          createErrorMessage(message);
+        //the username now has a number so this tests if it's atleast six characters long
+        if(userName.length >=6){
+          //sets the global variable username to userName used later to make the post request
+          username = userName
+          //Once the username is valid this checks to see if the passwords are valid 
+          checkIfPasswordValid(password, confirmPassword )
         }
-        // checkIfPasswordsMatch(password, confirmPassword )
+        else{
+          //creates error if the username isn't at least six characters long
+          createErrorMessage("Username must be atleast 6 characters")
+        }
       }
-      
+      //runs if the username doesn't have a number
+      else{
+        createErrorMessage( "Username Must Have Atleast one number");
+      }
+    }
+  })
   }
-  
-  );
-  console.log(checkExisting);
-    
-
-
-  }else{
-    let message = "Please Fill Out All Fields"
-    createErrorMessage(message)
+  //if one or more of the fields are empty 
+  else{
+    createErrorMessage("Please Fill Out All Fields")
   }
 
 }
 
+
+async function getRequest(userName){
+  const request = await fetch('http://localhost:5000/users')
+  .then(data=> data.json())
+  .then(users=>{
+    let userExists;
+    users.map((user)=>{
+      if(user.username === userName){
+       const message = `${userName} is already taken please make another one`;
+        createErrorMessage(message);
+        userExists = true
+      }else{
+        userExists = false
+      }
+    })
+    return userExists
+
+  })
+ // .then(data=> console.log(data));
+
+  return request
+}
+
+
+
+
+//Creates error Message
 function createErrorMessage(mesg){
+
   const previousMessage = document.querySelector('.alert-message');
+  //if there already is an errror message return 
    if(previousMessage!== null) return
   const usernameLabel = document.getElementById('username-label')
   const div = document.createElement('div');
@@ -139,6 +139,7 @@ function createErrorMessage(mesg){
   div.classList.add('alert-message')
   div.appendChild(message);
   signinForm.insertBefore(div, usernameLabel)
+  //remove the message after 2 seconds
   setTimeout(removeErrorMessage, 2000, div)
  
 }
@@ -146,31 +147,33 @@ function createErrorMessage(mesg){
 function removeErrorMessage(div){
   div.remove();
 }
-const passwordSrength = document.querySelector('.password-strength');
-//passwordSrength.style.display = "none";
-//asswordInput.addEventListener('input', checkStrength);
 
 
-function checkIfPasswordsMatch(password, passwordConfirmation){
+
+
+
+function checkIfPasswordValid(password, passwordConfirmation){
+  //Checks if the password and confirm password match
   if(password!== passwordConfirmation){
-    let message = "Passwords don't match"
-    console.log(message)
-    createErrorMessage(message)
+    createErrorMessage("Passwords don't match")
+
   }else{
-    // userDetails.push(accountInfo)
+    //checks if the password has a number
     const containsNum = /\d/;
-    const valid = containsNum.test(password);
-    if(valid){
+    const hasNum = containsNum.test(password);
+    //if it has a number then check if it is atleast 8 characters long
+    if(hasNum){
       if(password.length< 8){
         createErrorMessage("password must have atleast eight characters")
 
       }else {
-        console.log("success")
+        //sets the newpassword global variable to the password
         newpassword = password
+        //changes state to display the profile images
         signinForm.style.display = "none";
+        //Function that fills up the div with the possible profile images 
         populateGallery();
       }
-
     }
     else{
       createErrorMessage("password must have atleast one number")
@@ -181,62 +184,13 @@ function checkIfPasswordsMatch(password, passwordConfirmation){
   }
 }
 
-// function checkStrength(e){
-//   passwordSrength.style.display = "block";
-// }
-// const defaultDisplay = function(e){
-//   passwordSrength.style.display = "none";
-  
-// }
-
-//passwordInput.addEventListener('blur', defaultDisplay);
-
-
-
-function sendPostRequest(e){
-  const selection = document.querySelector('.selected-profile');
-  if(e.target.id === 'finish-sign-up'&& selection){
-    
-    postUser(selection.src)
-
-    console.log("send post request");
-    console.log(window.location.href);
-    window.location.href = "index.html"
-  }
-}
-
- async function postUser(image){
-  console.log(username); console.log(newpassword);
-  const rawResponse =  await fetch('http://localhost:5000/users', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({username: username, password: newpassword, profilePic : image})
-  })
-
-
-  
-
-}
-async function getRequest(){
-  const request = await fetch('http://localhost:5000/users')
-  .then(data=> data.json())
- // .then(data=> console.log(data));
-
-  return request
-}
-//const signinFOrm 
-
 async function populateGallery(){
   const gallery = document.querySelector('.gallery-container')
   const getPictures = fetch('http://localhost:5000/users/pics')
   .then(data=>data.json())
   .then(data => {
-    console.log(data)
-    
     const pics = data;
+    //for every pic make a div and an image tag. set the images source to the url from the dat, and then 
     pics.map((pic)=>{
       const div = document.createElement('div');
       div.classList.add('profile-icon')
@@ -252,4 +206,52 @@ async function populateGallery(){
   }
     )
 }
-//populateGallery();
+
+container.addEventListener('click', pickIcon);
+
+
+function pickIcon(e){
+  //every image in the gallery has a class of profile-option
+  if(e.target.classList.contains('profile-option')){
+    const previousSelection = document.querySelector('.selected-profile');
+  //If there is already something selected than remove the selection if clicked again
+    if(previousSelection){
+      previousSelection.classList.remove('selected-profile');     
+    }else{
+      //If the target has a class of selected profile then remove it
+      if(e.target.classList.contains('selected-profile')){
+        e.target.classList.remove('selected-profile');
+      }else{
+        //add the class of selected profile which creates a border around the image indicating that it is currently selected
+        e.target.classList.add('selected-profile')
+      }    
+    } 
+  }
+}
+container.addEventListener('click', sendPostRequest)
+
+
+function sendPostRequest(e){
+  const selection = document.querySelector('.selected-profile');
+  //The set profile image button has the id of finish-sign-up. if there is a selected profile than call postuser with the images src passed in and then go back to the home page
+  if(e.target.id === 'finish-sign-up'&& selection){
+    postUser(selection.src)
+    window.location.href = "index.html"
+  }
+}
+
+ async function postUser(image){
+  //sends post request 
+  const rawResponse =  await fetch('http://localhost:5000/users', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    //username and newpassword passed in to the body as well as the source of the image selected 
+    body: JSON.stringify({username: username, password: newpassword, profilePic : image})
+  })
+
+  
+
+}
