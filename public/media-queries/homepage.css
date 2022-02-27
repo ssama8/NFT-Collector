@@ -44,7 +44,6 @@
   }
   #account-btns {
     height: 75px;
-    flex-direction: column;
     position: relative;
     justify-content: center;
   }
@@ -113,6 +112,12 @@
   }
   #navbar {
     padding-bottom: 0rem;
+  }
+  #account-btns {
+    flex-direction: column;
+  }
+  #account-btns * {
+    margin: 0.5rem 0;
   }
 
   #navbar ul {

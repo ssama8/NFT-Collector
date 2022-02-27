@@ -1,45 +1,57 @@
-
-console.log("test");
+//container of all of the elements for the page used for event delegation
 const portfolioSection = document.querySelector('.portfolio-container');
+
+//used to change state 
 const gallery = document.querySelector('.portfolio-gallery');
 const sellScreen = document.querySelector('.sell-screen');
-portfolioSection.addEventListener('click', updatePortfolio)
+const orderSummary = document.querySelector(".order-summary")
 
-const loginSection = document.querySelector('.login');
+
+//show login landing page
+const showloginSection = document.querySelector('.login');
+
+const goBackBtn = document.getElementById('go-back');
+
+//Variables declared that will be used to send the patch request when user sells a nft
 let loggedInUser;
 let purchasedNFTs;
 let nameSoldNFT; 
 let priceToSell; 
 let maxSellNumber;
+
+//array usd to calculate the portfolio worth 
 let assetValues = [];
 
-
+//function called right away to add every purchased nft to the gallery
+checkUserData();
 async function checkUserData(){
   const getUser = new httpRequest("http://localhost:5000/users")
  getUser.getRequest()
   .then(data=>{
-    console.log(data)
-    let copy = data;
+    const copy = data;
     copy.filter((user)=>{
       if(user.login){
         loggedInUser = user
       }
     })
+    //the user needs to be logged in so if not, display the landing page that prompts user to login
     if(loggedInUser === undefined){
       portfolioSection.style.display = "none";
-    }else{
-      loginSection.style.display = "none"
+    }
+    else{
+      showloginSection.style.display = "none"
 
-    
+    /*sets the profile image on the top and the username of the logged in user*/
     const profilePic = document.querySelector('.profile');
     profilePic.src = loggedInUser.profilePic;
     const username = document.querySelector('.username');
-
-
     username.textContent = `#${loggedInUser.username}`;
+
+    //all of the nfts purchased by the user
     purchasedNFTs = loggedInUser.purchasedItems;
 
 
+      //make a nft card with the data for ecerynft purchased
     loggedInUser.purchasedItems.map((item)=>{
       const div = document.createElement("div");
       const img = document.createElement('img');
@@ -47,34 +59,42 @@ async function checkUserData(){
       const description = document.createElement('h4');
       const number = document.createElement('h4');
 
+      //adding classes for styling purposes
       img.classList.add('purchased-nfts')
       div.classList.add("gallery-image")
       header.classList.add('name');
-      
       description.classList.add('price')
       number.classList.add('amount');
+
+        //setting the content
       header.textContent = item.name;
-      nameSoldNFT = item.name
-      number.textContent = `  ${item.quantity}`
-      description.textContent = ` ${item.price}`;
+      number.textContent = ` Quantity:  ${item.quantity}`
+      description.textContent = `Value:  ${item.price}`;
+      img.src = item.url;
+
       const priceInt = parseFloat(item.price)
       const quantityInt = parseFloat(item.quantity)
-      img.src = item.url;
       priceToSell = priceInt;
-
-      let orderWorth = priceInt * quantityInt
-    
-      orderWorth = `Total Value: ${+orderWorth.toFixed(2)} million`
-      assetValues.push(priceInt * quantityInt)
+      //getting the total worth of each nft by multiplying the amount by the price
+      const orderWorth = priceInt * quantityInt
+      
+      //setting the content for the total value
+      const totalValueText = `Total Value: ${+orderWorth.toFixed(2)} million`
       const orderValue = document.createElement('h4');
-      const button = document.createElement('button');
+      orderValue.textContent = totalValueText;
 
-      orderValue.textContent = orderWorth;
+      //pushing the value of each nft to the assetValues array to calculate the portfolio worth 
+      assetValues.push(priceInt * quantityInt)
+
+      //making the sell button 
+      const button = document.createElement('button');
       button.textContent = "Sell";
-      button.classList.add('sell-nft')
       button.classList.add('show-sell-screen')
+      button.id = "show-sell-screen"
 
       div.classList.add('showcase')
+      
+      
       div.appendChild(header);
       div.appendChild(img);
       div.appendChild(button);
@@ -83,111 +103,144 @@ async function checkUserData(){
       div.appendChild(orderValue);
 
 
-      
+      //apppending every nft to the gallery 
       gallery.appendChild(div);
-      calculatePortfolioWorth()
+
+      
 
     })
-  //addBuy();
+  //after all of the values are pushed into the assetValues array calculate the portfolio worth  
+  calculatePortfolioWorth()
 
   } 
 }
   )
 
 }
-checkUserData();
-
 
 function calculatePortfolioWorth(){
   const portfolioValue = document.querySelector('.net-worth');
-  console.log(assetValues)
+  //gets the value of all of the nfts
   let sum = assetValues.reduce((a,b)=>{
     return a +b;
   })
   sum = +sum.toFixed(2);
   portfolioValue.textContent = `Net Worth On Paper: $${sum} million`;
-
 }
+
+
+
+
+
+
+goBackBtn.addEventListener("click", goBack)
+
+function goBack(){
+  sellScreen.style.display = "none";
+}
+
+
+
+//used to get the url of what every nft is being sold 
 let currentItem;
 
-// function addBuy(){
-//   const div = document.createElement('div');
-//   div.classList.add('add-to-portfolio')
-//   const button = document.createElement('a');
-//   button.textContent = "Buy More NFT's"
-//   button.href = "http://localhost:5000/index.html"
-//   div.appendChild(button);
-//   gallery.appendChild(div);
-// }
 
 
 portfolioSection.addEventListener('click', sellItem)
 
-
 function sellItem(e){
+  //using event delegation to fire when user clicks the sell button  
   if(e.target.classList.contains('show-sell-screen')){
-    // portfolioSection.style.display = "none";
-     sellScreen.style.display = "flex";
-    counterValue.textContent = 0;
-const priceOfItem = document.querySelector('.price-description');
+    //puts the screen in the middle of the page
+    positionsellScreen()
 
+     sellScreen.style.display = "flex";
+     //hiding the sell sScreen but keeping the child, orderSummary, visible because of a backgroung bug on the sellScreen 
+     sellScreen.style.visibility = "hidden";
+    orderSummary.style.visibility = "visible"
+
+    //variable from the js file linked before the portfolio controlling the counter
+    counterValue.textContent = 0;
+    
+    //getting the elemetns that need to dynamically be updated
+    const priceOfItem = document.querySelector('.price-description');
     const sellItem = document.querySelector('.item-to-sell');
     const nameOfItem = document.querySelector('.heading-nft')
-    let siblingElements = [...e.target.parentElement.childNodes]
-    console.log(siblingElements)
-    let name = siblingElements.filter((node)=>{
+
+    //gets the sibling elements of the button to display the nft on the sell screen 
+    const siblingElements = [...e.target.parentElement.childNodes]
+
+    //getting the correct sibling element 
+    const name = siblingElements.filter((node)=>{
       return node.classList.contains('name');
     })
-    let img = siblingElements.filter((node)=>{
+    const img = siblingElements.filter((node)=>{
       return node.classList.contains("purchased-nfts")
     })
-    let price = siblingElements.filter((node)=>{
+    const price = siblingElements.filter((node)=>{
       return node.classList.contains("price")
     })
-    let quantity = siblingElements.filter((node)=>{
+    const quantity = siblingElements.filter((node)=>{
       return node.classList.contains("amount")
     })
     const url = img[0].src
-    currentItem = url;
-    const value = parseFloat(price[0].textContent)
-    const number = parseInt(quantity[0].textContent)
-    maxSellNumber = number;
-    console.log(number);
-    console.log(quantity[0]);
-    console.log(number);
-    console.log(value);
     sellItem.src = url;
+
+    //sets the currentItem to the url which will be used when nft is sold
+    currentItem = url;
+    //getting just the number from the text
+    const priceNum = price[0].textContent.split(' ')
+    const noSpaces = priceNum.filter((words)=>{
+      return words !==''
+    })
+    const value = parseFloat(noSpaces[1])
     priceOfItem.textContent = `The value of this NFT on paper is $${value} million`
-    console.log(name.innerHTML);
-    nameOfItem.textContent = name[0].textContent;
-    console.log(decrementCounter);
-    
+
+    //getting just the number from the text
+    const quanityText = quantity[0].textContent.split(" ")
+    const getWord = quanityText.filter((words)=>{
+      return words !== ""
+    })
+    //sets the max value of the counter, counter can't be greater than the the amount of amount
+    const number = parseInt(getWord[1])
+    maxSellNumber = number;
+   
+   nameOfItem.textContent = name[0].textContent;
+
+   //sets the nameSoldNFT to the header of the nft 
+   nameSoldNFT = nameOfItem.textContent  
+
+
     
   }
 }
+//sets the sell screen inthe middle of the page with a fixed position 
+function positionsellScreen(){
+  const orderSummary = document.querySelector('.order-summary')
+  const image = document.querySelector(".item-to-sell")
+  image.style.height = `${window.innerHeight/8}px`
+  orderSummary.style.position = "fixed"
+  const sellScreenHeight = window.innerHeight/2
+  sellScreen.style.top = `${sellScreenHeight}px`;
+  orderSummary.style.height = `${sellScreenHeight}px`
+
+}
 
 
-
-function  addEventListener(){
+//adding event listeners to change the value of the counter
   decrementCounter.addEventListener('click', subtractCounter);
   incrementCounter.addEventListener('click',addCounter);
 
 
-}
 
 function subtractCounter(){
   const priceOfItem = document.querySelector('.price-description');
   const sellValue = document.querySelector('.sell-value')
-  let value = parseInt(counterValue.textContent) -1
-  if(value <= 0){
-    counterValue.textContent = 0
-  }
-  else{
-    counterValue.textContent = value;
-
-  }
-  console.log(priceOfItem);
-  console.log(priceToSell);
+  //the new value
+  const value = parseInt(counterValue.textContent) -1
+  //value can't bet negative
+  if(value < 0) counterValue.textContent = 0
+  else counterValue.textContent = value;
   sellValue.textContent = `$${+(priceToSell * parseInt(counterValue.textContent)).toFixed(2)} million`;
 }
 
@@ -195,57 +248,52 @@ function subtractCounter(){
 function addCounter(){
   const priceOfItem = document.querySelector('.price-description');
   const sellValue = document.querySelector('.sell-value')
-  let value = parseInt(counterValue.textContent) +1
-  console.log(maxSellNumber);
-  if(value >= maxSellNumber){
-    counterValue.textContent = maxSellNumber
-  }else{
-    counterValue.textContent = value;
-
-  }
+  //new value
+  const value = parseInt(counterValue.textContent) +1
+  //value can't be greater than the maxSellNumber
+  if(value > maxSellNumber)counterValue.textContent = maxSellNumber
+  else counterValue.textContent = value;
   sellValue.textContent = `$${+(priceToSell * parseInt(counterValue.textContent)).toFixed(2)} million`;
 
 }
-addEventListener();
+//the receipt shows after the item is sold. m
+const receipt = document.querySelector('.receipt')
+
+portfolioSection.addEventListener('click', updatePortfolio)
+
+
  
 function updatePortfolio(e){
   if(e.target.id === 'update-portfolio' && counterValue.textContent!== '0'  ){
-    let itemToSell;
-    console.log('send patch request to server')
-    console.log(loggedInUser);
-    console.log(purchasedNFTs);
-    console.log(currentItem)
-    purchasedNFTs.filter((nft)=>{
-      console.log(nft);
-      if(nft.url === currentItem){
-        itemToSell = nft.url
-      }
-    })
-    const counterQuantity = parseInt(counterValue.textContent)
-    console.log(itemToSell);
-    console.log(nameSoldNFT);
-    console.log(priceToSell);
-const postPurchases = new httpRequest("http://localhost:5000/users", loggedInUser.username, itemToSell, loggedInUser.password,maxSellNumber -  counterQuantity  )
-postPurchases.nftPostPurchasesRequest(priceToSell, nameSoldNFT, "sell")
+    orderSummary.style.display = "none"
+    receipt.style.display = "block"
+    receipt.style.visibility = "visible"
 
-  //  postPurchases(loggedInUser.username, loggedInUser.password, itemToSell, priceToSell,  maxSellNumber - parseInt(counterValue.textContent) , nameSoldNFT )
-    // fetch("http://localhost:5000/users")
-    // .then(data=> data.json())
-    // .then(data=> console.log(data));
-    window.location.reload();
+     positionScreen()
+  
+    const counterQuantity = parseInt(counterValue.textContent)
+    const postPurchases = new httpRequest("http://localhost:5000/users", loggedInUser.username, currentItem, loggedInUser.password,maxSellNumber -  counterQuantity  )
+    postPurchases.nftPostPurchasesRequest(priceToSell, nameSoldNFT, "sell")
+
   }
+}
+const reloadBtn = document.getElementById('reload-page');
+const redirectHome = document.getElementById('redirect-home')
+
+reloadBtn.addEventListener("click", ()=>{
+     window.location.reload();
+
+})
+redirectHome.addEventListener("click", ()=>{
+  window.location.href = "index.html"
+})
+
+function positionScreen(){
+  receipt.style.position = "fixed"
+  receipt.style.width = `${window.innerWidth/2}px`
+  receipt.style.height = "min-content"
+  receipt.style.top = `${window.innerHeight/3}px`;
+
 }
 
 
-
-
-// async function postPurchases(username, password, link, price,  quantity, header){
-//   const addToPortfolio = await fetch('http://localhost:5000/users', {
-//     method: 'PATCH',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({username: username, password: password, login : true, purchasedItem: [{url: link, price: `${price} million`, quantity: quantity, name: header}], type: "sell"})
-//   })
-// } 

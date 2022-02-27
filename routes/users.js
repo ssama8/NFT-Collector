@@ -152,20 +152,14 @@ router.post('/', (req, res)=>{
       return user;
     }
   })
-
-  console.log(req.body);
-  console.log(checkExisting)
   newUser.purchasedItems = [];
   newUser.images = images;
    if(checkExisting.length === 0) users.push(newUser)
   res.send(`User with the user name of ${newUser.username} was added to the database`);
- // res.send(JSON.parse(req.body));
 })
 
 router.patch('/', (req, res)=>{
-  console.log(req.url)
   const {username, password, login} = req.body;
-  //console.log(req.body)
   let loggedInUser = users.find((user)=> {
     if(user.username === username &&  user.password === password){
       return user;
@@ -173,44 +167,24 @@ router.patch('/', (req, res)=>{
 
    
   });
-  //console.log(users)
-  //console.log(loggedInUser);
   let index = users.indexOf(loggedInUser);
   users[index].login = login;
 
- // console.log(index);
-  //users[index].login = login;
   
   if(req.body.purchasedItem!== undefined){
   
-   let allPurchases = users[index].purchasedItems;
-  //  if(allPurchases === []){
-  //    allPurchases.push(req.body)
-  //  }
+   const allPurchases = users[index].purchasedItems;
    allPurchases.map((purchase, index)=>{
      if(purchase.url === req.body.purchasedItem[0].url){
-       console.log('huhuhuhuhhuhu')
        if(req.body.type !== "sell"){
-
        req.body.purchasedItem[0].quantity =  req.body.purchasedItem[0].quantity + purchase.quantity
-   
-        
        }
-
-
        allPurchases.splice(index, 1);
-      
+       if(req.body.purchasedItem[0].quantity !==0){
+        allPurchases.splice(index, 0, req.body.purchasedItem[0])
+      }
      }
-
    })
-   console.log(allPurchases);
-    if(req.body.purchasedItem[0].quantity !==0){
-     allPurchases.push(req.body.purchasedItem[0])
-
-   }
-   console.log(allPurchases);
-  console.log(users[0].purchasedItems);   
-    //users[index].purchasedItems.push(req.body.purchasedItem);
   }
   
    res.send(`The user with the username ${username} is now logged in and just purchase  of the nfts with the url of ${req.body.purchasedItem}`)
