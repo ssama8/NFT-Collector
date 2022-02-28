@@ -100,6 +100,8 @@ function fillOutPreview(){
   //if there is no error then populate the preview section with the given inputs
   if(!error){
     loadingScreen.style.display = "none";
+    const inputContainer = document.querySelector(".inputs-container")
+    inputContainer.style.display = "none";
     document.querySelector('.preview-nft').style.display = "block";
     const nameHeading = document.querySelector('.nft-name')
     const priceHeading = document.querySelector('.nft-price')
@@ -141,6 +143,8 @@ redirectBtn.addEventListener("click", goBack)
 function goBack(e){
   e.preventDefault();
   loadingScreen.style.display = "none";
+  const inputContainer = document.querySelector(".inputs-container")
+  inputContainer.style.display = "block";
   const nameHeading = document.querySelector('.nft-name')
   const priceHeading = document.querySelector('.nft-price')
   nameHeading.textContent = ''

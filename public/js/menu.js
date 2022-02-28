@@ -1,18 +1,27 @@
+const container = document.getElementById('container');
+
+
+//navbar buttons 
 const signUpBtn = document.getElementById('sign-up')
 const loginButton = document.getElementById('login-btn');
 const profile = document.getElementById('profile');
-const container = document.getElementById('container');
+
+//account settings dropdown 
 const accountSettings= document.querySelector('.settings-list')
-container.addEventListener("click", showProfileSettings)
-container.addEventListener('click', signOut);
-//container.addEventListener('click', updateProfile);
+
 container.addEventListener('click', updateChangeRequest);
 container.addEventListener("click", showSettings)
+
+//initially setting if a user is signed in to false 
 const accountState = {
   signedIn : false
 
 }
+//getting the user logged in if there is one 
 let currentUser;
+
+
+//function that gets the user thats logged in 
 async function getDetails(){
   
   const getDetails = new httpRequest("http://localhost:5000/users" )
@@ -31,61 +40,58 @@ async function getDetails(){
 }
 
 
-
-
+showLoginStatus();
+//called on page load to check if there is a logged in user 
 function showLoginStatus(){
   getDetails()
-    .then(data=> {
-      console.log(data);
-      if(data.length !== 0){
-        console.log("show")
+    .then(user=> {
+      //if there is a logged in user
+      if(user.length !== 0){
+        //hide the menu buttons
         signUpBtn.style.display = "none";
-            loginButton.style.display = "none";
-            profile.style.display = "flex" 
-        console.log(profile);
-
-            //const img = document.getElementById('profile-image-display');
-            const img = document.querySelectorAll('.profile-image');
-            console.log(img)
+        loginButton.style.display = "none";
+        //show the profile image and set it to the users profile pic
+        profile.style.display = "flex" 
+        const img = document.querySelectorAll('.profile-image');
             img.forEach((img)=>{
-              img.src = data[0].profilePic
+              img.src = user[0].profilePic
 
             })
             const usernameDisplay = document.querySelector('.current-username')
             const passwordDisplay = document.querySelector('#current-password')
+            //populates the username and password of the account settings dropdown 
+            usernameDisplay.textContent = user[0].username;
+            passwordDisplay.value= user[0].password;
 
-            usernameDisplay.textContent = data[0].username;
-            passwordDisplay.value= data[0].password;
+            currentUser = user;
 
-            console.log(data)
-            currentUser = data;
-
-          
+          //setting signedIn to true 
       
             accountState.signedIn = true;
-      }else{
-        console.log('get rid of')
+      }
+      //if no logged in user then show the menu buttons and hide the profile image 
+      else{
         profile.style.display = "none"     
-  
-            signUpBtn.style.display = "block";
-            loginButton.style.display = "block";
-            accountState.signedIn = false;
+        signUpBtn.style.display = "block";
+        loginButton.style.display = "block";
+        accountState.signedIn = false;
       }
     })
-    .catch(err => console.log('get request not received'));
-    console.log(currentUser);
+    .catch(err => alert(err));
   }
   
-  showLoginStatus();
 
+
+  
 
   const accountNav = document.getElementById('account-details');
   accountNav.style.display = "none";
 
-  function showProfileSettings(e){
+  container.addEventListener("click", showProfileSettings)
 
+//toggles the sign out, account settings, and delete account dropdown 
+  function showProfileSettings(e){
     if(e.target.id === 'profile-image-display'){
-      console.log("show account Settings");
       ('account-details');
       if(accountNav.style.display === "none"){
         accountNav.style.display = "flex";
@@ -94,46 +100,37 @@ function showLoginStatus(){
         accountSettings.style.display = "none";
         const accountButton = document.getElementById("account-settings")
         accountButton.classList.remove("visible")
-
-  
       }
-      
     }
   }
 
 
-
+container.addEventListener('click', signOut);
+//signs out of account 
 function signOut(e){
   if(e.target.id === "sign-out" ){
     e.preventDefault();
-    console.log("sign-Out");
     getDetails()
-    .then(data => {
-    
-      console.log(data);
-      
-      const status = false;
-      const loginSite = new httpRequest('http://localhost:5000/users', data[0].username, null, data[0].password)
-    loginSite.loginRequest(status)
-     // sendPatchReguest(data[0].username, data[0].password, status)
+    .then(user => {
+      const signOut = new httpRequest('http://localhost:5000/users', user[0].username, null, user[0].password)
+      //satting if the users logged in to false 
+      signOut.loginRequest(false)
       accountState.signedIn = false;
       currentUser = null;
-   window.location.reload();
+      window.location.reload();
       
     });
   }
 }
-
+//toggles the account settings dropdown 
 function showSettings(e){
   if(e.target.id === "account-settings"){
     if(e.target.classList.contains("visible")) {
       accountSettings.style.display = "none";
       e.target.classList.remove("visible");
-   // document.documentElement.style.setProperty('--site-settings-list-margin', '-20px');
       
     }else{
       accountSettings.style.display = "flex";
-     // document.documentElement.style.setProperty('--site-settings-list-margin', '-90px');
       e.target.classList.add("visible");
     }
    
@@ -141,52 +138,31 @@ function showSettings(e){
   }
 }
 
-
+//sending the correct request to the server depending on what the user wants to change, the changeSettings page will get this request and display what the user wants to change 
 function updateChangeRequest(e){
-  //  console.log(e.target.classList)
     if(e.target.classList.contains("change-request")){
     e.preventDefault()
   
-      console.log('update settings')
       const sendData = new httpRequest("http://localhost:5000/users/change-request")
-      console.log(e.target.id)
+     //sendProfileSettings takes in 4 arguments, 1 is the profile pic, 2 is the username, 3 is the password, 4 is to delete the account 
       if(e.target.id === "change-profile-image" ){
-
+        //change profile image
         sendData.sendProfileSettings(true)
       }else if(e.target.id === "change-username"){
+        //change the username
         sendData.sendProfileSettings(null, true)
   
       }else if(e.target.id === "delete-user"){
-        console.log("sending");
+        //remove the account
         sendData.sendProfileSettings(null, null, null, true)
       }
       else{
+        //change the password 
         sendData.sendProfileSettings(null, null,  true)
-  
       }
-  
-      console.log("running")
    window.location.href = 'changeAccountSettings.html';
-  
     }
   }
-
-
-// async function sendPatchReguest(username, password, status){
-//   const signOut = await fetch('http://localhost:5000/users',
-//   {
-//     method: 'PATCH',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({username: username, password: password, login: status})
-//   })
-//   // const get = await fetch('http://localhost:5000/users')
-//   // .then(data=> data.json())
-//   // .then(data=> console.log(data))
-
-// }
 
 
 

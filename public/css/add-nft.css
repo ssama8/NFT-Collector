@@ -17,15 +17,7 @@
   font-weight: bold;
   justify-content: center;
 }
-.main-header {
-  color: black;
-}
-hr {
-  width: 100%;
-  border: 1px solid black;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-}
+
 .add-screen input {
   display: block;
   width: 100%;
@@ -37,6 +29,16 @@ hr {
   width: 250px;
   height: 250px;
   margin: 0 auto;
+}
+
+.main-header {
+  color: black;
+}
+hr {
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .error-div {
@@ -52,6 +54,7 @@ hr {
 .preview-nft {
   display: none;
 }
+
 .preview-btn,
 .redirect {
   font-size: 1.25rem;
