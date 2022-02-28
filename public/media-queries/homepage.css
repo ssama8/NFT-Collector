@@ -102,6 +102,7 @@
     font-size: 1rem;
   }
 }
+
 @media screen and (max-width: 500px) {
   #navbar > ul {
     margin: 0 auto;
@@ -119,7 +120,12 @@
   #account-btns * {
     margin: 0.5rem 0;
   }
-
+  .settings-list {
+    display: none;
+    position: absolute;
+    top: 120px;
+    right: -50px;
+  }
   #navbar ul {
     display: flex;
     flex-direction: column;
@@ -146,6 +152,12 @@
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
+  #account-details {
+    margin-top: -1rem;
+  }
+  #account-btns .settings-list * {
+    margin: 0.125rem 0;
+  }
   #gallery {
     grid-template-columns: 1fr;
   }
@@ -156,5 +168,12 @@
   .buy-nft {
     padding: 0.75rem 1.25rem;
     font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .gallery-pic img {
+    height: 150px;
+    width: 150px;
   }
 }

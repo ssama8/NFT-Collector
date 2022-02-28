@@ -52,6 +52,7 @@ async function checkUserData(){
 
 
       //make a nft card with the data for ecerynft purchased
+    console.log(loggedInUser.purchasedItems)
     loggedInUser.purchasedItems.map((item)=>{
       const div = document.createElement("div");
       const img = document.createElement('img');
@@ -120,6 +121,8 @@ async function checkUserData(){
 
 function calculatePortfolioWorth(){
   const portfolioValue = document.querySelector('.net-worth');
+  //if there are not nfts in the portfolio return 
+  if(assetValues.length === 0)return 
   //gets the value of all of the nfts
   let sum = assetValues.reduce((a,b)=>{
     return a +b;
@@ -264,15 +267,19 @@ portfolioSection.addEventListener('click', updatePortfolio)
 
  
 function updatePortfolio(e){
+  //if the quantity is not zero than create a sale and send the request to server
   if(e.target.id === 'update-portfolio' && counterValue.textContent!== '0'  ){
+    //sgowing the receipt 
     orderSummary.style.display = "none"
     receipt.style.display = "block"
     receipt.style.visibility = "visible"
-
+    //positions the receipt
      positionScreen()
   
     const counterQuantity = parseInt(counterValue.textContent)
+    //instantiating post purchases as a new http request 
     const postPurchases = new httpRequest("http://localhost:5000/users", loggedInUser.username, currentItem, loggedInUser.password,maxSellNumber -  counterQuantity  )
+    //sends request to server to update the quantity of the sold nft
     postPurchases.nftPostPurchasesRequest(priceToSell, nameSoldNFT, "sell")
 
   }
@@ -280,10 +287,12 @@ function updatePortfolio(e){
 const reloadBtn = document.getElementById('reload-page');
 const redirectHome = document.getElementById('redirect-home')
 
+//reloads page
 reloadBtn.addEventListener("click", ()=>{
      window.location.reload();
 
 })
+//redirects to home page
 redirectHome.addEventListener("click", ()=>{
   window.location.href = "index.html"
 })
