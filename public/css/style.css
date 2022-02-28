@@ -4,15 +4,6 @@
   box-sizing: border-box;
 }
 
-.btn-light {
-  background-color: rgb(130, 199, 255);
-  text-align: center;
-}
-.btn-light-2 {
-  background-color: rgb(232, 244, 253);
-  color: rgb(27, 122, 199);
-  white-space: nowrap;
-}
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -33,6 +24,16 @@ body {
   border-radius: 20px;
   font-weight: bold;
 }
+.btn-light {
+  background-color: rgb(130, 199, 255);
+  text-align: center;
+}
+.btn-light-2 {
+  background-color: rgb(232, 244, 253);
+  color: rgb(27, 122, 199);
+  white-space: nowrap;
+}
+
 ul {
   list-style: none;
 }
@@ -275,7 +276,7 @@ button {
 .gallery-pic {
   --gallery-pic-background-color: rgb(15, 68, 112);
 }
-
+/*images in the gallery*/
 .gallery-pic {
   display: flex;
   flex-direction: column;
@@ -291,6 +292,7 @@ button {
   height: 250px;
   width: 250px;
 }
+/*Interactive button to buy and sell */
 .buy-nft,
 .sell-nft {
   padding: 1rem 4rem;

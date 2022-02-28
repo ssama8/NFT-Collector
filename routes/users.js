@@ -2,66 +2,63 @@ import express from 'express';
 
 const router = express.Router();
 
-import users from './accounts.js'
-import images from './image-gallery.js'
-const placeOrder = "placeorder";
-//import images from './image-gallery.js'
+//array that will contain all of the users
+let users = [];
 
-// router.get('/:imageurl',(req,res)=>{
-//   res.send(1)
-// } )
-let nftToOrder = {
-  url : "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-4.png",
-  price: "2.3 ",
-  name: "Bored Ape #2087",
-} 
+//the array of default nfts
+import images from './image-gallery.js'
+
+ 
 router.get('/', (req, res)=>{
   res.send(users);
 })
+
+
 router.get('/pics', (req, res)=>{
   res.send(images);
 })
 
-
+/*patch request to user/pics that adds the custom nft */ 
 router.patch('/pics', (req, res)=>{
   const {src, name, price} = req.body;
-  console.log(price);
-  const object = {
-    src:src,
-name: name,
-price: `${price}  `,
-description: `Sold for ${price} million USD at the time of the transaction`
+  //sets the new nfts keys
+  const newNFT = {
+  src:src,
+  name: name,
+  price: `${price}  `,
+  description: `Sold for ${price} million USD at the time of the transaction`
   }
-  let filtered = users.filter((user=>{
+  //gets the user logged in 
+  const filtered = users.filter((user=>{
     return user.login 
   }))
-  console.log(filtered);
-  filtered[0].images = [...filtered[0].images, object]
-
+  //destructures the users images currently stored and adds the newNFT
+  filtered[0].images = [...filtered[0].images, newNFT]
 
   res.send(`${name} was added to the gallery `);
 })
 
-  
-
-router.get('/placeorder', (req, res)=>{
-  res.send(nftToOrder);
-})
+//indicates what the user wants to change
 const changeSetting = {
   profileImage: null,
   password: null,
   username: null,
   remove: null
 }
+
+
 router.get('/change-request', (req, res)=>{
   res.send(changeSetting)
 })
+
+
 router.patch('/change-request', (req, res)=>{
   const {profileImage, password, username, remove} = req.body;
+  //resets all of the keys so that only one of the keys has the value of "change"
   for(const key in changeSetting){
     changeSetting[key] = null;
   }
-  console.log(remove)
+
   if(profileImage) changeSetting.profileImage = "change"
   else if (password) changeSetting.password = "change"
   else if(username)changeSetting.username = "change";
@@ -70,81 +67,44 @@ router.patch('/change-request', (req, res)=>{
 
   res.send("updated")
 })
-router.get('/:username', (req, res)=>{
-  const {username} = req.params;
-  const findUser = users.find((user)=> user.username === username)
-  // if(username === placeOrder) res.send(nftToOrder)
-  if(!findUser) res.send("error 404 page not found")
-  res.send(findUser)
+
+
+
+let nftToOrder = {
+  url : null,
+  price: null ,
+  name: null,
+
+} 
+
+router.get('/placeorder', (req, res)=>{
+  res.send(nftToOrder);
 })
-router.patch('/:username', (req,res)=>{
-  const {username} = req.params;
-  const {url, newusername, newpassword } = req.body;
-  const findUser = users.find((user)=> user.username === username)
-  // if(username === placeOrder) res.send(nftToOrder)
-  if(!findUser) res.send("error 404 page not found")
- // console.log(findUser);
-  if(url){
-    findUser.profilePic = url;
-
-  }else if(newpassword){
-    
-    findUser.password = newpassword
-  }else if (newusername){
-    findUser.username = newusername
-
-  }
-  
-  console.log(findUser.username);
-  res.send(findUser.username)
-})
-router.delete('/:username', (req, res)=>{
-  const {username} = req.params;
-  const findUser = users.find((user)=> user.username === username)
-  const index = users.indexOf(findUser)
-  console.log(index)
-  if(!findUser) res.send("error 404 page not found")
-  users.splice(index, 1);
-  
-  
-  res.send(`user ${findUser.username} has been deleted from the database`)
-  
 
 
-})
+
 router.post('/placeorder', (req, res)=>{
-   const {username, url} = req.body;
-  nftToOrder.url  = url;
-//console.log(images);
-console.log(req.body)
+  //request will contain a username and a url . 
+  console.log(users)
+  const {username, url} = req.body;
+  //gets the user
     let filtered = users.filter((user)=>{
      return user.username === username
     })
-    console.log(filtered)
+    //goes through the users images and finds the one that matches the url
   let targetNFT= filtered[0].images.filter((image)=>{
     return image.src === url;
   })
-//  console.log(targetNFT);
+  //sets the nftToOrder keys
+  console.log(targetNFT);
+  nftToOrder.url  = url;
   nftToOrder.price = targetNFT[0].price
   nftToOrder.name = targetNFT[0].name
   res.send(`User with the username of ${username} has decided to look at the nft with the url ${url}`);
   
 })
-// {
-//   username: "ssama2",
-//   password : "hidethisplease",
-//   login: false,
-//   profilePic: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-4.png",
-//   purchasedItems :[{url: "https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-4.png",
-//   price: "2.3 million",
-//   quantity: 8,
-//   name: "Bored Ape #2087"
-  
-// }
 
-// ],
-// images: imageCopy
-// }
+//post route that adds the user to the users array once they sign up 
 router.post('/', (req, res)=>{
   const newUser = req.body;
   const checkExisting = users.filter((user)=>{
@@ -158,38 +118,91 @@ router.post('/', (req, res)=>{
   res.send(`User with the user name of ${newUser.username} was added to the database`);
 })
 
+//rote that deals with logging in and out and buying and selling nfts
 router.patch('/', (req, res)=>{
+
   const {username, password, login} = req.body;
-  let loggedInUser = users.find((user)=> {
+  //gets the logged in user 
+  const loggedInUser = users.find((user)=> {
     if(user.username === username &&  user.password === password){
       return user;
     }
-
-   
   });
-  let index = users.indexOf(loggedInUser);
+
+  const index = users.indexOf(loggedInUser);
+  //logs user in or out depending on what was sent in the request as login
   users[index].login = login;
 
   
+  //if the user bought or sold a nft this will run 
   if(req.body.purchasedItem!== undefined){
   
    const allPurchases = users[index].purchasedItems;
+  let exists = false;
+
    allPurchases.map((purchase, index)=>{
+     //finding if there are any duplicates
      if(purchase.url === req.body.purchasedItem[0].url){
+       exists = true
+       /*if the user is buying the same nft make sure to add the quantities as one, so that there aren't 2 slots in the portfolio for the same nft*/
        if(req.body.type !== "sell"){
        req.body.purchasedItem[0].quantity =  req.body.purchasedItem[0].quantity + purchase.quantity
        }
+       //get rid of where the old nft was 
        allPurchases.splice(index, 1);
        if(req.body.purchasedItem[0].quantity !==0){
+         //if there is atleast one nft insert the new nft in it's previous spot but with the updated quantity 
         allPurchases.splice(index, 0, req.body.purchasedItem[0])
       }
      }
    })
+   //if the nft didn't exist already and is brand new to the portfolio then add it to the end of the allPurchases array 
+   if(req.body.type !== "sell" && !exists){
+    allPurchases.push(req.body.purchasedItem[0])
+   }
   }
-  
-   res.send(`The user with the username ${username} is now logged in and just purchase  of the nfts with the url of ${req.body.purchasedItem}`)
- //  console.log(users[index]);
-
+   res.send(`The user with the username ${username}  just purchased a nft with the url of ${req.body.purchasedItem}`)
 })
+
+
+
+
+
+
+//get request by the username, if the username isn't found send an error
+router.get('/:username', (req, res)=>{
+  const {username} = req.params;
+  const findUser = users.find((user)=> user.username === username)
+  if(!findUser) res.send("error 404 page not found")
+  res.send(findUser)
+})
+
+//changes data about the user 
+router.patch('/:username', (req,res)=>{
+  const {username} = req.params;
+  const {url, newusername, newpassword } = req.body;
+  const findUser = users.find((user)=> user.username === username)
+  if(!findUser) res.send("error 404 page not found")
+  if(url)  findUser.profilePic = url   //if the user wants to change their profile image
+  else if(newpassword) findUser.password = newpassword   //if the user wants to change their password
+  else if (newusername) findUser.username = newusername //if the user wants to change their username 
+  res.send(findUser.username)
+})
+
+
+
+
+
+//deletes the user
+router.delete('/:username', (req, res)=>{
+  const {username} = req.params;
+  const findUser = users.find((user)=> user.username === username)
+  const index = users.indexOf(findUser)
+  if(!findUser) res.send("error 404 page not found")
+  //removes the user from the database 
+  users.splice(index, 1);
+  res.send(`user ${findUser.username} has been deleted from the database`)
+})
+
 
 export default router;
