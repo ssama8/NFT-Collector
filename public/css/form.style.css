@@ -118,7 +118,7 @@ body {
   filter: brightness(80%);
 }
 .selected-profile {
-  border: 15px solid black;
+  border: 5px solid black;
 }
 .profile-icon-container {
   z-index: 1;

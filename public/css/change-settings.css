@@ -1,6 +1,6 @@
 .change-account-settings {
   background: url(../images/change-settings-background.jpg) center center/cover;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,6 +21,11 @@
   background: none;
   width: 1200px;
   display: none;
+}
+.change-account-settings .profile-option {
+  width: 150px;
+  height: 150px;
+  /* border: 3px solid black; */
 }
 
 .confirm-new-image {
