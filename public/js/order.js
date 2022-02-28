@@ -123,7 +123,13 @@ function goBack(){
   purchaseScreen.style.display = "none";
   backArrow.style.display = "none";
   h1.style.display = "block";
-  orderScreen.style.display = "grid"
+  /*media query that changes the display type at 768px*/ 
+  if(window.innerWidth > 768){
+    orderScreen.style.display = "grid"
+  }else{
+    orderScreen.style.display = "flex"
+    
+  }
 }
 
 //On double click screen shot the image simulating a purchase of the nft
