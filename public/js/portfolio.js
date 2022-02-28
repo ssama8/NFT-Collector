@@ -6,6 +6,10 @@ const gallery = document.querySelector('.portfolio-gallery');
 const sellScreen = document.querySelector('.sell-screen');
 const orderSummary = document.querySelector(".order-summary")
 
+//variables that have to do with the counter
+const decrementCounter = document.querySelector('.decrement');
+const incrementCounter = document.querySelector('.increment');
+const counterValue = document.querySelector('.quantity');
 
 //show login landing page
 const showloginSection = document.querySelector('.login');
