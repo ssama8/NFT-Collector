@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow-x: hidden;
 }
 .change-account-settings::before {
   content: "";
@@ -25,7 +26,6 @@
 .change-account-settings .profile-option {
   width: 150px;
   height: 150px;
-  /* border: 3px solid black; */
 }
 
 .confirm-new-image {
