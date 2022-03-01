@@ -23,21 +23,26 @@ function loginToAccount(e){
   }else{
     //Instantiating loginSite as a new httpRequest with null being image source because there is no url involved in the request
     const loginSite = new httpRequest('http://localhost:5000/users', username, null, password)
-    //Calling the makeGetRequest function with the httpRequest object, username and password. This will return the account that matches the username and password inputted
-    const checkExists = makeGetRequest(loginSite, username, password);
-    checkExists
-    .then(user=>{
-      //If there is no user that matches than create error message with the following text 
-      if(user.length === 0) {
-        createErrorMessage("Username or Password is not correct ")
-      }else{
-        //If there is a user set the login status to true
-        loginSite.loginRequest(true);
-        //Redirect to home page
-       window.location.href = "index.html"
-        
-      }
+    const check = loginSite.loginRequest(true)
+    .then(resp=>{
+      if(resp.status === 200) setTimeout(window.location.href = "index.html", 250) 
+      else createErrorMessage("username or password is not correct")
     })
+    //Calling the makeGetRequest function with the httpRequest object, username and password. This will return the account that matches the username and password inputted
+  // const checkExists = makeGetRequest(loginSite, username, password);
+    //checkExists
+    // .then(user=>{
+    //   //If there is no user that matches than create error message with the following text 
+    //   if(user.length === 0) {
+    //     createErrorMessage("Username or Password is not correct ")
+    //   }else{
+    //     //If there is a user set the login status to true
+    //     loginSite.loginRequest(true);
+    //     //Redirect to home page
+    //    window.location.href = "index.html"
+        
+    //   }
+    // })
 
   }
 

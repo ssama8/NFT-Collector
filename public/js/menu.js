@@ -113,7 +113,7 @@ function signOut(e){
     getDetails()
     .then(user => {
       const signOut = new httpRequest('http://localhost:5000/users', user[0].username, null, user[0].password)
-      //satting if the users logged in to false 
+      //saying if the users logged in to false 
       signOut.loginRequest(false)
       accountState.signedIn = false;
       currentUser = null;

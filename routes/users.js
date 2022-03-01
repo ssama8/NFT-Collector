@@ -1,9 +1,21 @@
 import express from 'express';
 
+//used to encrypt password
+import bcrypt from 'bcrypt'
+
 const router = express.Router();
 
 //array that will contain all of the users
-let users = [];
+let users = [
+//   {
+//   username: 'shadyMan321',
+//   password: 'hello',
+//   profilePic: 'https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-6.png',
+//   login: true,
+//   images: images,
+//   purchasedItems: []
+// }
+]
 
 //the array of default nfts
 import images from './image-gallery.js'
@@ -105,8 +117,18 @@ router.post('/placeorder', (req, res)=>{
 })
 
 //post route that adds the user to the users array once they sign up 
-router.post('/', (req, res)=>{
+router.post('/', async (req, res)=>{
   const newUser = req.body;
+//const newUser = {username: req.body.username};
+ //encrypts the password so that if anybody gets access to the database they can't get people's passwords 
+  try {
+    const hashedPassword = await bcrypt.hash(newUser.password, 10) 
+    newUser.password = hashedPassword
+  }catch{
+    res.status(500) 
+  }
+console.log(newUser)
+   //checking for an existing user
   const checkExisting = users.filter((user)=>{
     if(user.username === newUser.username){
       return user;
@@ -114,24 +136,50 @@ router.post('/', (req, res)=>{
   })
   newUser.purchasedItems = [];
   newUser.images = images;
-   if(checkExisting.length === 0) users.push(newUser)
-  res.send(`User with the user name of ${newUser.username} was added to the database`);
+   if(checkExisting.length === 0){
+    users.push(newUser)
+    res.send(`User with the user name of ${newUser.username} was added to the database`);
+   }
+   //if there is an existing user
+   else{
+     res.send(`user can't be added because the username ${newUser} already exists`)
+   }
+  
 })
 
 //rote that deals with logging in and out and buying and selling nfts
-router.patch('/', (req, res)=>{
+router.patch('/', async (req, res)=>{
 
   const {username, password, login} = req.body;
-  //gets the logged in user 
-  const loggedInUser = users.find((user)=> {
-    if(user.username === username &&  user.password === password){
-      return user;
-    }
-  });
+  
+  const user = users.find(user => user.username === username)
+  const index = users.indexOf(user);
+  if(!login) {
+    user.login = login
+    res.send("user successfully logged out")
+    return 
+  }
+  if(user === null){
+    res.status(400).send("username isn't correct")
+  }
+  try{
+    //compare function, hash comes second
+    if( await bcrypt.compare(password, user.password) || password === user.password  && req.body.purchasedItem === undefined){
+      //logs user in or out depending on what was sent in the request as login
+      users[index].login = login;
+   res.send(`The user with the username ${username}  just made a request to login or out`)
 
-  const index = users.indexOf(loggedInUser);
-  //logs user in or out depending on what was sent in the request as login
-  users[index].login = login;
+    }else if (req.body.purchasedItem === undefined){
+    res.status(500).send("password isn't correct ") 
+     
+    }
+
+  }
+  catch{
+    res.status(400).send("unable to login ")
+  }
+
+
 
   
   //if the user bought or sold a nft this will run 
@@ -160,8 +208,9 @@ router.patch('/', (req, res)=>{
    if(req.body.type !== "sell" && !exists){
     allPurchases.push(req.body.purchasedItem[0])
    }
+   res.send(`The user with the username ${username}  just purchased an nft `)
+
   }
-   res.send(`The user with the username ${username}  just purchased a nft with the url of ${req.body.purchasedItem}`)
 })
 
 
@@ -178,13 +227,13 @@ router.get('/:username', (req, res)=>{
 })
 
 //changes data about the user 
-router.patch('/:username', (req,res)=>{
+router.patch('/:username', async (req,res)=>{
   const {username} = req.params;
   const {url, newusername, newpassword } = req.body;
   const findUser = users.find((user)=> user.username === username)
   if(!findUser) res.send("error 404 page not found")
   if(url)  findUser.profilePic = url   //if the user wants to change their profile image
-  else if(newpassword) findUser.password = newpassword   //if the user wants to change their password
+  else if(newpassword) findUser.password = await bcrypt.hash(newpassword, 10 )   //if the user wants to change their password
   else if (newusername) findUser.username = newusername //if the user wants to change their username 
   res.send(findUser.username)
 })

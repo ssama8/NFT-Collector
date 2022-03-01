@@ -159,7 +159,7 @@ function removeErrorMessage(div){
 container.addEventListener("click", changeLogin)
 
 function changeLogin(e){
-  //the same button us used to perform all of the different requests but it is given a different class if the user wants to change their username or delete their account  this only fires if the button doesn't have the patch-username or delete-account class
+  //the same button  used to perform all of the different requests but it is given a different class if the user wants to change their username or delete their account. This only fires if the button doesn't have the patch-username or delete-account class
   if(e.target.id === "change-parameter" && !e.target.classList.contains('patch-username')&& !e.target.classList.contains('delete-account')){
     e.preventDefault()
     //if all fields are filled out check if its valid
@@ -170,60 +170,109 @@ function changeLogin(e){
 
 //checking user authentication to see if the input vlaues match the users username and password
 function checkIfValid(username, password){
+  let approved;
+
  getUser()
  .then(user=>{
   //if the inputs match 
-   if(user[0].username === username && user[0].password === password){
-     console.log("valid")
-     getState.getRequest()
-     .then(update=>{
-       //if the user wanted to change their password show the change password state
-       if(update.password){
-        formDiv.style.display = "none"
-        formDiv.classList.add("hidden");
-        changePassword.style.display = "block"
-       }else{
-        const changeBtn = document.getElementById("change-parameter");
-        passwordInput.disabled = true;
-        usernameInput.disabled = true
-        const copyBtn = changeBtn;
-        //if the user wanted to remove their account show the remove state
-         if(update.remove){
-          changeBtn.remove();
-          confirmation.style.display = "block";
-          copyBtn.value = "Delete Account";
-          copyBtn.classList.add("delete-account")
-          formDiv.appendChild(copyBtn);
-         }
-         //if the user wanted to change their username then show the username state
-         else{
-          // passwordInput.disabled = true;
-          // usernameInput.disabled = true;
-          const label = document.createElement('label');
-          label.for = "new-username"
-          label.textContent = "Enter new username"
-          const changeUsername = document.createElement('input');
-          changeUsername.type = "text";
-         changeUsername.id = "new-username";
-         const copyBtn = changeBtn;
-         copyBtn.value = "Change Username"
-         copyBtn.classList.add("patch-username")
-         formDiv.appendChild(label);
-         formDiv.appendChild(changeUsername)
-         formDiv.appendChild(copyBtn);
-         }
+  const checkInfo = new httpRequest('http://localhost:5000/users', username, null, password)
+  checkInfo.loginRequest(true)
+  .then(resp=>{
+    console.log(resp);
+    if (resp.status === 200) userAuthenticated()
+    else createErrorMessage("wrong username or password")
+
+  })
+  //console.log(approved)
+  //  if(approved){
+  //    getState.getRequest()
+  //    .then(update=>{
+  //      //if the user wanted to change their password show the change password state
+  //      if(update.password){
+  //       formDiv.style.display = "none"
+  //       formDiv.classList.add("hidden");
+  //       changePassword.style.display = "block"
+  //      }else{
+  //       const changeBtn = document.getElementById("change-parameter");
+  //       passwordInput.disabled = true;
+  //       usernameInput.disabled = true
+  //       const copyBtn = changeBtn;
+  //       //if the user wanted to remove their account show the remove state
+  //        if(update.remove){
+  //         changeBtn.remove();
+  //         confirmation.style.display = "block";
+  //         copyBtn.value = "Delete Account";
+  //         copyBtn.classList.add("delete-account")
+  //         formDiv.appendChild(copyBtn);
+  //        }
+  //        //if the user wanted to change their username then show the username state
+  //        else{
+  //         const label = document.createElement('label');
+  //         label.for = "new-username"
+  //         label.textContent = "Enter new username"
+  //         const changeUsername = document.createElement('input');
+  //         changeUsername.type = "text";
+  //        changeUsername.id = "new-username";
+  //        const copyBtn = changeBtn;
+  //        copyBtn.value = "Change Username"
+  //        copyBtn.classList.add("patch-username")
+  //        formDiv.appendChild(label);
+  //        formDiv.appendChild(changeUsername)
+  //        formDiv.appendChild(copyBtn);
+  //        }
       
         
-       }
-     })
+  //      }
+  //    })
    
-   }
-   else{
-    createErrorMessage("wrong username or password")
-   }
+  //  }
+  //  else{
+  //   createErrorMessage("wrong username or password")
+  //  }
  })
 }
-
+function userAuthenticated(){
+    getState.getRequest()
+    .then(update=>{
+      //if the user wanted to change their password show the change password state
+      if(update.password){
+       formDiv.style.display = "none"
+       formDiv.classList.add("hidden");
+       changePassword.style.display = "block"
+      }else{
+       const changeBtn = document.getElementById("change-parameter");
+       passwordInput.disabled = true;
+       usernameInput.disabled = true
+       const copyBtn = changeBtn;
+       //if the user wanted to remove their account show the remove state
+        if(update.remove){
+         changeBtn.remove();
+         confirmation.style.display = "block";
+         copyBtn.value = "Delete Account";
+         copyBtn.classList.add("delete-account")
+         formDiv.appendChild(copyBtn);
+        }
+        //if the user wanted to change their username then show the username state
+        else{
+         const label = document.createElement('label');
+         label.for = "new-username"
+         label.textContent = "Enter new username"
+         const changeUsername = document.createElement('input');
+         changeUsername.type = "text";
+        changeUsername.id = "new-username";
+        const copyBtn = changeBtn;
+        copyBtn.value = "Change Username"
+        copyBtn.classList.add("patch-username")
+        formDiv.appendChild(label);
+        formDiv.appendChild(changeUsername)
+        formDiv.appendChild(copyBtn);
+        }
+     
+       
+      }
+    })
+  
+}
 
 const passwordLabel = document.getElementById('.new-password-label')
 container.addEventListener('click', updatePassword);
