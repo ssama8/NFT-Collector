@@ -7,14 +7,7 @@ const router = express.Router();
 
 //array that will contain all of the users
 let users = [
-//   {
-//   username: 'shadyMan321',
-//   password: 'hello',
-//   profilePic: 'https://www.nftsstreet.com/wp-content/uploads/2021/11/unnamed-6.png',
-//   login: true,
-//   images: images,
-//   purchasedItems: []
-// }
+
 ]
 
 //the array of default nfts
