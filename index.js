@@ -6,13 +6,7 @@ const app = express();
 
 
 const port = 5000;
-// app.use(
-//   cors((
-//     {
-//       origin: "http://localhost:5000/add/html"
-//     }
-//   ))
-// )
+
 app.use(bodyParser.json());
 app.use(express.static('public'))
 app.use('/users', usersRoutes);
