@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./media-queries/homepage.css" media = "screen and (max-width: 1100px)">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <nav id="navbar">
+        <ul class = "menu">
+          <a href="" class = "current"> <li>Home </li></a>
+          <a href="add.html" id= "long-heading"> <li>Add NFT </li></a>
+          <a href="portfolio.html"> <li>Portfolio </li></a>
+
+
+
+        </ul>
+        <div id = "account-btns"> 
+          <a href="form.html" class="btn btn-light" id = "sign-up">Sign Up</a>
+          <a href="login.html" class="btn btn-light-2" id = "login-btn">Login</a>
+          <div id="profile">
+            <img src="" alt="" class =  "profile-image" id = "profile-image-display">
+            <ul  id = "account-details">
+              <div> 
+                <li id = "sign-out">Sign Out</li>
+              </div>
+              <div class = "account-parent"> 
+                <li id = "account-settings">  Account Settings</li>
+                <aside class = "settings-list"> 
+                  <ul>
+                    <li> <p>Profile Image: </p> </li>
+                    <img src="" alt="" class = "profile-image ">
+                    <button class = "change-request" id = "change-profile-image"> Change Profile Photo</button>
+                    <li> <p> Username : <span class="current-username"> ssama2</span> </p></li>
+                    <button class = "change-request" id = "change-username"> Change Username</button>
+                    <li> <p> Password: <input type="password" value = "test" name="password" id="current-password" disabled ></p></li>
+                    <button class = "change-request" id = "change-password"> Change Password</button>
+
+                  </ul>
+                </aside>
+              </div>
+              <div ><li class = "change-request" id ="delete-user"> Delete Account</li></div>
+      
+      
+      
+      
+            </ul>
+           
+          </div>
+
+        
+         <!-- <i class="fas fa-user-alt fa-3x" id = "profile"></i> 
+           <i class="fas fa-users fa-3x"></i> -->
+          
+
+        </div>
+      </nav>
+  
+      
+   
+    </div>
+      
+    <div id="showcase">
+
+      <div class = "showcase-description">
+        <h3>Welcome To The NFT Collector!</h3>
+        <p>NFts have been going crazy of late and are selling for millions of dollars.
+         Don't worry though because now now you can buy and sell the most expensive Bored Ape NFts for a fraction of the cost. 
+
+        </p>
+        <p>Just make an account or login to start collecting</p>
+
+        <a class = "show-gallery" href="#collection-header"> Buy NFT</a>
+
+      </div>
+    </div>
+
+    <div class="image-area">
+      
+
+    <div class="relative-layer">
+      <div class="alert-overlay"> </div>
+      <div class="alert">
+        <div class="header"> <h3> Unable To Buy</h3></div>
+        <div class="body"> <p> Make sure to sign up or login in to you're account if you already have one to order NFTs.</p></div>
+        <div class="footer"> <button id = "remove-alert">Exit</button></div>
+      </div>
+    </div>
+     
+      <h2 class = "collection-header" id = "collection-header">NFT Collection </h2>
+
+      <div id="gallery">
+      </div>    
+    </div>
+  
+    
+  </div>
+  <script src="./js/httpRequests.js"></script>
+  <script src="./js/menu.js"></script>
+  <script type = "module" src="./js/app.js"></script>
+</body>
+</html>

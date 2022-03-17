@@ -1,0 +1,230 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	font-family: arial;
+	background-color: rgb(59, 184, 241);
+}
+#container {
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+#container h1 {
+	font-size: 4rem;
+	text-align: center;
+}
+.container-2 {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+/*holds everything below the place order header*/
+.nft-area {
+	padding: 2rem;
+	height: 75vh;
+	display: flex;
+	align-items: center;
+}
+.heading {
+	display: flex;
+	margin: 0 0 2rem 0;
+	align-items: center;
+	justify-content: space-between;
+}
+.image-heading h3 {
+	font-size: 3rem;
+	margin-bottom: 2rem;
+}
+.heading h5 {
+	font-size: 2.25rem;
+	display: none;
+}
+.nft-pic {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	height: min-content;
+	grid-gap: 2rem;
+	max-width: 1200px;
+	margin-top: 2rem;
+}
+/*the image on the order screen */
+.nft-to-buy {
+	width: 400px;
+	height: 400px;
+}
+
+/*The section with the price, description, quantity, and order button*/
+.nft-license-background {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.nft-license-background h4,
+.place-order {
+	font-size: 2rem;
+	margin: 1rem 0;
+}
+.nft-license-background p {
+	margin: 1rem 0;
+	font-size: 1.5rem;
+	line-height: 1.6;
+	font-weight: bold;
+}
+.nft-license-background h3 {
+	font-size: 3rem;
+	margin: 1rem 0;
+}
+/*The Place Order button*/
+.place-order {
+	margin: 3rem 0;
+	padding: 1rem 0;
+	cursor: pointer;
+}
+
+.b1 {
+	margin-top: -1.5rem;
+	margin-bottom: 2rem;
+	border: 5px solid black;
+	position: relative;
+}
+
+/*The counter section */
+.counter {
+	display: flex;
+	align-items: center;
+}
+.quantity {
+	font-size: 3rem;
+	font-weight: bold;
+	margin: 0 1rem;
+}
+.decrement,
+.increment {
+	background-color: red;
+	height: 40px;
+	width: 50px;
+	border-radius: 75px;
+	display: flex;
+	align-items: center;
+	border: 2px solid black;
+	cursor: pointer;
+}
+.increment {
+	display: block;
+	position: relative;
+}
+.subtract-sign,
+.vertical-sign {
+	width: 35px;
+	height: 5px;
+	margin: 0 auto;
+	background-color: black;
+}
+.increment .subtract-sign {
+	position: absolute;
+	top: 12.5px;
+	left: 7.5px;
+	width: 30px;
+}
+.vertical-sign {
+	position: absolute;
+	width: 30px;
+	top: 15px;
+	left: 7.5px;
+	transform: rotate(90deg);
+}
+
+/*The screen where nft is actually purchased*/
+.purchase-screen {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	display: none;
+	padding: 2rem;
+	height: 100%;
+}
+.purchase-screen h3 {
+	font-size: 4rem;
+}
+.purchase-screen h4 {
+	font-size: 2rem;
+	margin: 2rem 0;
+}
+.purchase-screen h5 {
+	font-size: 1.5rem;
+	margin: 2rem 0;
+}
+.purchase-screen p {
+	margin-bottom: 2rem;
+}
+.purchase-screen img {
+	height: 250px;
+	width: 250px;
+	margin-bottom: 3rem;
+	cursor: pointer;
+}
+/*paragraph at the bottom of the purchase screen */
+.order-summary {
+	font-size: 1.75rem;
+	line-height: 1.6;
+	width: 46%;
+	margin-top: 1rem;
+	margin: 1rem auto;
+	font-weight: bold;
+}
+/*custom made back arrow on the purchase screen*/
+#arrow {
+	height: 20px;
+	width: 20px;
+}
+
+.back-arrow {
+	cursor: pointer;
+}
+.arrow-tip {
+	height: 25px;
+	width: 25px;
+	border-top: 10px solid blue;
+	border-left: 10px solid blue;
+	transform: rotate(-45deg);
+}
+.arrow {
+	height: 10px;
+	width: 50px;
+	background-color: blue;
+	margin-top: -17.5px;
+}
+.name {
+	color: rgb(180, 17, 17);
+}
+
+/*Screen that shows after purchase is made*/
+.menu-screen {
+	position: absolute;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.menu-screen > * {
+	margin: 1rem 0;
+}
+.menu-screen h3 {
+	font-size: 2rem;
+}
+.menu-screen p {
+	font-size: 1.5rem;
+}
+.menu-screen a {
+	text-decoration: none;
+	color: white;
+	padding: 1rem 2rem;
+	background-color: rgb(182, 31, 31);
+}

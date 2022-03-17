@@ -1,0 +1,229 @@
+.login {
+	--portfolio-background-overlay: url(../images/nft-license-image.png);
+	--add-nft-background-overlay: url(../images/add-page-background.jpg);
+}
+#container {
+	background: none;
+	min-height: 100vh;
+	background-color: rgb(233, 103, 103);
+}
+/*portfolio container*/
+.portfolio-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem;
+}
+.portfolio-container h1 {
+	margin: 0 0 1rem 0;
+	font-size: 1.5rem;
+}
+/*The username below the image*/
+.username {
+	margin: 1rem 0;
+}
+
+/*Profile image on the top of the page*/
+.profile {
+	margin-top: 1rem;
+	height: 100px;
+	width: 100px;
+}
+.portfolio-gallery-container {
+	width: 80%;
+	text-align: center;
+}
+
+hr {
+	border: 2px solid black;
+	width: 80%;
+}
+/*portfolio gallery that holds the nfts in the portfolio*/
+.portfolio-container .portfolio-gallery {
+	margin-top: 3rem;
+	max-width: 1200px;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: repeat(3, 1fr);
+	max-height: max-content;
+	border-radius: 10px;
+	margin: 3rem auto;
+}
+
+/*image in the gallery*/
+.gallery-image {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem;
+	align-items: center;
+	border: none;
+	color: black;
+	font-weight: bold;
+	background-color: rgb(224, 224, 224);
+
+	border-radius: 5px;
+}
+.gallery-image .purchased-nfts {
+	height: 150px;
+	width: 150px;
+	margin: 1rem 0;
+}
+
+/*landing page if user is not logged inj */
+.login,
+.login-add-page .login {
+	padding: 2rem;
+	height: 100vh;
+	margin-top: -100px;
+	color: white;
+	position: relative;
+	font-weight: bold;
+	background-color: rgb(10, 10, 10);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.login h2 {
+	font-size: 2rem;
+}
+.login p {
+	margin: 1rem 0;
+	font-size: 1.25rem;
+}
+.login a {
+	color: white;
+	background-color: rgb(20, 42, 116);
+	margin: 0 auto;
+	width: 20%;
+	text-align: center;
+	padding: 1rem 0;
+}
+.login::before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: var(--portfolio-background-overlay) center center/cover no-repeat;
+
+	opacity: 0.2;
+}
+.login-add-page .login::before {
+	background: var(--add-nft-background-overlay) center center/cover no-repeat;
+	opacity: 0.1;
+}
+
+h2,
+a {
+	z-index: 1;
+	cursor: pointer;
+}
+
+.net-worth {
+	font-size: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+
+/*Sell Screen*/
+
+.sell-screen,
+.order-summary {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(162, 228, 240);
+	z-index: 100;
+	/* height: 100%; */
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+#container .sell-screen {
+	display: none;
+	z-index: 1;
+	height: 0px;
+	width: 0px;
+}
+.sell-screen .decrement,
+.sell-screen .increment {
+	transform: scale(0.75);
+	transition: all 1s;
+}
+
+.sell-screen h3,
+.sell-screen h4 {
+	margin: 0.5rem 0;
+	font-size: 1rem;
+}
+.heading-nft {
+	font-size: 1.15rem;
+	margin-bottom: -1rem;
+}
+/* .sell-screen .sell-nft {
+  margin-bottom: -1rem;
+} */
+#show-sell-screen {
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+	background-color: red;
+	color: white;
+	width: 60%;
+	padding: 0.25rem 0.5rem;
+}
+
+.add-to-portfolio {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.add-to-portfolio a {
+	padding: 0.5rem 1rem;
+	background-color: black;
+	font-weight: bold;
+	font-size: 1.25rem;
+	color: white;
+	cursor: pointer;
+}
+.receipt {
+	display: none;
+	background-color: white;
+	padding: 1rem;
+
+	position: absolute;
+	height: 100%;
+	z-index: 1;
+}
+.receipt p {
+	line-height: 1.2;
+	font-weight: bold;
+	font-size: 1.25rem;
+}
+.paper {
+	color: red;
+}
+.price {
+	font-size: 1rem;
+}
+
+#update-portfolio,
+#go-back {
+	font-size: 0.74rem;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem 0;
+	transition: all 1s;
+}
+#update-portfolio:hover,
+#go-back:hover,
+.increment:hover,
+.decrement:hover {
+	background-color: rgb(75, 2, 2);
+}
+
+.order-summary .quantity {
+	font-size: 2rem;
+}
+.order-summary {
+	z-index: 100;
+}

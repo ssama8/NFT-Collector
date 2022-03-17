@@ -1,0 +1,26 @@
+.gallery-image .purchased-nfts {
+  height: 125px;
+  width: 125px;
+}
+.name {
+  font-size: 1rem;
+}
+.gallery-image h4 {
+  font-size: 0.75rem;
+}
+
+@media screen and (max-width: 768px) {
+  #container .portfolio-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #container .portfolio-gallery {
+    grid-template-columns: 1fr;
+  }
+  .gallery-image .purchased-nfts {
+    height: 150px;
+    width: 150px;
+  }
+}

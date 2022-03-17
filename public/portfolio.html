@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/counter.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/portfolio.css">
+  <link rel="stylesheet" href="./media-queries/homepage.css" media = "screen and (max-width: 1100px)">
+  <link rel="stylesheet" href="./media-queries/portfolio-responsive.css" media = "screen and (max-width: 900px)">
+
+
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <nav id="navbar">
+        <ul class = "menu">
+          <a href="index.html#gallery" > <li>Home </li></a>
+          <a href="add.html"> <li>Add NFT </li></a>
+          <a href="" class = "current"> <li>Portfolio </li></a>
+
+
+
+        </ul>
+        <div id = "account-btns"> 
+          <a href="form.html" class="btn btn-light" id = "sign-up">Sign Up</a>
+          <a href="login.html" class="btn btn-light-2" id = "login-btn">Login</a>
+          <div id="profile">
+            <img src="" alt="" class = "profile-image" id = "profile-image-display">
+            <ul  id = "account-details">
+              <div>
+                <li id = "sign-out">Sign Out</li>
+              </div>
+              <div>
+                <li id = "account-settings">  Account Settings</li>
+                <aside class = "settings-list"> 
+                  <ul>
+                    <li> <p>Profile Image: </p> </li>
+                    <img src="" alt="" class = "profile-image ">
+                    <button class = "change-request" id = "change-profile-image"> Change Profile Photo</button>
+                    <li> <p> Username : <span class="current-username"> ssama2</span> </p></li>
+                    <button class = "change-request" id = "change-username"> Change Username</button>
+                    <li> <p> Password: <input type="password" value = "test" name="password" id="current-password" disabled ></p></li>
+                    <button class = "change-request" id = "change-password"> Change Password</button>
+
+                  </ul>
+                </aside>
+              </div>
+             
+              <div ><li class = "change-request" id ="delete-user"> Delete Account</li></div>
+      
+      
+      
+      
+      
+            </ul>
+           
+          </div>
+        </div>
+      </nav>
+  
+      
+   
+    </div>
+    <div class="login">
+      <h2 class = "test">You Are Not Logged In To Your Account</h2>
+      <p>If you already have an existing account then login:</p>
+      <a href="login.html"> Login</a>
+      <p>If you don't already have an account, signup: </p>
+      <a href="form.html"> SignUp</a>
+
+    </div>
+    <div class="portfolio-container">
+      <img src="" alt="" class="profile">
+      <h2 class="username"></h2>
+      <h1>Portfolio </h1>
+      <hr>
+      <div class="portfolio-gallery-container">
+        <h5 class = "net-worth"></h5>
+        <div class="add-to-portfolio">
+          <a href="http://localhost:5000/index.html#gallery">Buy More NFT's </a>
+        </div>
+        <div class="portfolio-gallery">
+
+        </div>
+        
+      </div>
+      <div class="sell-screen">
+        <div  class="receipt">
+          <p>
+            You Just sold <span class="amount"> 2</span> <span class="name">Bored apes</span> a grand total of $0. You did gain millions of dollars worth of value <span class="paper">
+              ON PAPER
+            </span> but in reality all you got was a screenshot that anybody with an internet connection can obtain. You didn't gain any money on your sale and are still broke. Unless you are someone with significant influence, you aren't going to get rich off of NFT's. But hey,  atleast you didn't waste your hard earned money on a picture of an ape like these other nitwits. 
+          </p>
+          <button class = "view-portfolio" id = "reload-page"> Look at updated portfolio </button>
+          <button class = "view-portfolio" id = "redirect-home"> Buy Another NFT </button>
+
+        </div>
+        <div class="order-summary">
+          <h3 class="heading-nft"></h3>
+          <img src="" alt="" class="item-to-sell">
+          <h3 class = "price-description"></h3>
+          <h3>How many do you want to sell?</h3>
+  
+          <div class="counter">
+            <div class="decrement"> 
+               <div class="subtract-sign"></div>
+             </div>
+            <div class="quantity">0</div>
+            <div class="increment">
+             <div class="subtract-sign"></div>
+             <div class="vertical-sign"></div>
+  
+            </div>
+          </div>
+          <h4 class="sell-value"></h4>
+          <button class="sell-nft" id = "update-portfolio">Sell</button>
+          <button class="sell-nft" id = "go-back">Go Back</button>
+          
+        </div>
+      
+      </div>
+
+      </div>
+     
+
+  </div>
+  <script src="./js/httpRequests.js"></script>
+  <script src="./js/menu.js"></script>
+  <script src="./js/portfolio.js"></script>
+</body>
+</html>
