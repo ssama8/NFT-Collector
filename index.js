@@ -3,8 +3,7 @@ import bodyParser from "body-parser";
 import usersRoutes from "./routes/users.js";
 const app = express();
 
-const hostname = "0.0.0.0";
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -14,6 +13,6 @@ app.get("/", (req, res) => {
 	res.send("hello from homepage");
 });
 
-app.listen(port, hostname, () => {
-	console.log(`Server running on port: http://${hostname}:${port}`);
+app.listen(port, () => {
+	console.log(`Server running on port: http://${port}`);
 });
