@@ -1,7 +1,7 @@
 /*Made class called httpRequest that is inserted in the 
 HTML before the app.js file to perform http requests to 
 the servers rest api*/
-const users = new httpRequest("http://localhost:5000/users/pics");
+const users = new httpRequest("https://nft-collector.herokuapp.com/users/pics");
 
 //Container holding everything used for event delegation
 const container = document.getElementById("container");
