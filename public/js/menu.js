@@ -21,7 +21,7 @@ let currentUser;
 //function that gets the user thats logged in
 async function getDetails() {
 	const getDetails = new httpRequest(
-		"https://nft-collector.herokuapp.com//users"
+		"https://nft-collector.herokuapp.com/users"
 	);
 	const findLogin = getDetails.getRequest().then((data) => {
 		let copyData = [...data];
