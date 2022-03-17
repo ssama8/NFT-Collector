@@ -101,7 +101,7 @@ function signOut(e) {
 		e.preventDefault();
 		getDetails().then((user) => {
 			const signOut = new httpRequest(
-				"http://localhost:5000/users",
+				"https://nft-collector.herokuapp.com/users",
 				user[0].username,
 				null,
 				user[0].password
@@ -133,7 +133,7 @@ function updateChangeRequest(e) {
 		e.preventDefault();
 
 		const sendData = new httpRequest(
-			"http://localhost:5000/users/change-request"
+			"https://nft-collector.herokuapp.com/users/change-request"
 		);
 		//sendProfileSettings takes in 4 arguments, 1 is the profile pic, 2 is the username, 3 is the password, 4 is to delete the account
 		if (e.target.id === "change-profile-image") {
