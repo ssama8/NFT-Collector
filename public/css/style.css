@@ -1,381 +1,451 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+/*Hiding hamburger menu at a certain width*/
+@media screen and (min-width: 769px) {
+	.hamburger-menu {
+		display: none !important;
+	}
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 :root {
-  --website-width: 1200px;
-  --header-color: #333;
-  --primary-color: rgb(138, 222, 255);
-  --site-settings-list-margin: -20px;
+	--website-width: 1200px;
+	--header-color: #333;
+	--primary-color: rgb(138, 222, 255);
+	--site-settings-list-margin: -20px;
 }
 .current {
-  border-bottom: orange 5px solid;
+	border-bottom: orange 5px solid;
+	margin-bottom: 1rem;
 }
 
 .btn {
-  background-color: white;
-  color: black;
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  font-weight: bold;
+	background-color: white;
+	color: black;
+	padding: 0.75rem 1.5rem;
+	border-radius: 20px;
+	font-weight: bold;
 }
 .btn-light {
-  background-color: rgb(130, 199, 255);
-  text-align: center;
+	background-color: rgb(130, 199, 255);
+	text-align: center;
 }
 .btn-light-2 {
-  background-color: rgb(232, 244, 253);
-  color: rgb(27, 122, 199);
-  white-space: nowrap;
+	background-color: rgb(232, 244, 253);
+	color: rgb(27, 122, 199);
+	white-space: nowrap;
 }
 
 ul {
-  list-style: none;
+	list-style: none;
 }
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 #container {
-  position: relative;
-  background-color: var(--primary-color);
+	position: relative;
+	background-color: var(--primary-color);
 }
 
 /*Navbar styles*/
+
 #header {
-  position: sticky;
-  width: 100%;
-  top: 0;
-  background-color: var(--header-color);
-  z-index: 100;
+	position: sticky;
+	width: 100%;
+	top: 0;
+	background-color: var(--header-color);
+	z-index: 100;
 }
 #navbar {
-  max-width: var(--website-width);
-  margin: 0 auto;
-  display: grid;
-  height: 100px;
-  grid-template-columns: 2fr 1fr;
+	max-width: var(--website-width);
+	margin: 0 auto;
+	display: grid;
+	height: 100px;
+	grid-template-columns: 2fr 1fr;
 }
 
 #navbar ul {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 #navbar ul.menu a {
-  color: white;
-  font-size: 1.25rem;
-  display: inline-block;
-  padding: 1rem;
-  margin: 0 1.25rem;
+	color: white;
+	font-size: 1.25rem;
+	display: inline-block;
+	padding: 1rem;
+	margin: 0 1.25rem;
 }
 
 #navbar i {
-  cursor: pointer;
-  color: rgb(26, 142, 236);
+	cursor: pointer;
+	color: rgb(26, 142, 236);
 }
 /*The sign up, login buttons*/
 #account-btns {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 #profile,
 #sign-up,
 #login-btn {
-  display: none;
-  margin: 0 1rem;
+	display: none;
+	margin: 0 1rem;
 }
 /*div in the navbar that has the profile image*/
 #profile {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  display: none;
-  align-self: center;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	display: none;
+	align-self: center;
 }
 /*Dropdown styles when profile image is clicked*/
 #account-details {
-  background-color: #333;
-  text-align: center;
-  position: absolute;
-  top: 90px;
-  left: var(--site-settings-list-margin);
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  display: none;
+	background-color: #333;
+	text-align: center;
+	position: absolute;
+	top: 90px;
+	left: var(--site-settings-list-margin);
+	width: max-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	display: none;
 }
 
 #account-details div {
-  width: 100%;
+	width: 100%;
 }
 
 #account-details div > li {
-  padding: 0.5rem;
-  margin: 1rem 0;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-  transition: all 0.25s;
-  cursor: pointer;
+	padding: 0.5rem;
+	margin: 1rem 0;
+	color: white;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	transition: all 0.25s;
+	cursor: pointer;
 }
 #account-details div > li:hover {
-  background-color: #999;
-  color: blue;
+	background-color: #999;
+	color: blue;
 }
 
 /*dropdown of account settings*/
 .account-settings {
-  position: absolute;
-  top: 100px;
-  height: 200px;
-  width: 200px;
-  background-color: white;
+	position: absolute;
+	top: 100px;
+	height: 200px;
+	width: 200px;
+	background-color: white;
 }
 
 .account-parent {
-  display: relative;
+	display: relative;
 }
 .profile-picture {
-  width: 100px;
-  height: 100px;
+	width: 100px;
+	height: 100px;
 }
 /* The dropdown with the change settings options*/
 .settings-list ul {
-  background-color: #333;
-  color: white;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+	background-color: #333;
+	color: white;
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .settings-list ul img {
-  width: 75px;
-  height: 75px;
+	width: 75px;
+	height: 75px;
 }
 .settings-list ul h3 {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 button {
-  margin: 0.5rem 0 1rem 0;
+	margin: 0.5rem 0 1rem 0;
 }
 .settings-list {
-  display: none;
-  position: absolute;
-  top: 90px;
-  right: 140px;
+	display: none;
+	position: absolute;
+	top: 90px;
+	right: 140px;
 }
 /*The profile image in the account settings dropdown*/
 .profile-image {
-  height: 90px;
-  width: 90px;
-  border-radius: 10px;
-  padding: 0.5rem;
-  cursor: pointer;
+	height: 90px;
+	width: 90px;
+	border-radius: 10px;
+	padding: 0.5rem;
+	cursor: pointer;
+}
+
+/*Hamburger Menu for responsive design */
+
+.hamburger-menu {
+	height: 80px;
+	width: 80px;
+	background-color: green;
+	position: fixed;
+	top: 0px;
+	z-index: 100;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 1rem;
+	cursor: pointer;
+}
+
+.hamburger-menu:hover .line,
+.hamburger-menu:hover .top-line,
+.hamburger-menu:hover .bottom-line {
+	transform: rotate(30deg);
+}
+.line,
+.top-line,
+.bottom-line {
+	height: 5px;
+	position: absolute;
+	width: 40px;
+	left: 20px;
+	top: 37.5px;
+	background-color: white;
+	transition: all 0.8s;
+}
+.top-line {
+	position: absolute;
+	top: 25px;
+}
+.bottom-line {
+	position: absolute;
+	top: 50px;
+}
+
+.sidebar {
+	position: absolute;
+	z-index: 100000;
+	top: 0;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	background-color: black;
+	opacity: 0.8;
+	font-weight: bold;
+	align-items: center;
+	text-align: center;
+}
+.sidebar #navbar {
+	grid-template-columns: 1fr;
+}
+.sidebar #navbar ul {
+	flex-direction: column;
 }
 
 /*Showcase Section*/
 #showcase {
-  background: url(../images/nft-show.jpg) center center/cover no-repeat;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
+	background: url(../images/nft-show.jpg) center center/cover no-repeat;
+	height: 100vh;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
 }
 #showcase > * {
-  z-index: 50;
+	z-index: 9;
 }
 /*the showcase for the add nft page with the different background image*/
 .add-nft-page #showcase {
-  background: url(../images/addnft.jpg) center center/cover no-repeat;
-  height: 100vh;
-  margin: 0 auto;
+	background: url(../images/addnft.jpg) center center/cover no-repeat;
+	height: 100vh;
+	margin: 0 auto;
 }
 .add-nft-page #showcase:before {
-  content: "";
-  position: absolute;
-  background-color: rgb(4, 8, 46);
-  height: 100vh;
-  width: 100%;
-  opacity: 0.75;
+	content: "";
+	position: absolute;
+	background-color: rgb(4, 8, 46);
+	height: 100vh;
+	width: 100%;
+	opacity: 0.75;
 }
 
 .showcase-description {
-  color: white;
-  text-align: center;
-  width: var(--website-width);
-  height: max-content;
-  margin: -3rem auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	color: white;
+	text-align: center;
+	width: var(--website-width);
+	height: max-content;
+	margin: -3rem auto 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .showcase-description h3 {
-  font-size: 3rem;
-  margin-bottom: 2rem;
+	font-size: 3rem;
+	margin-bottom: 2rem;
 }
 .showcase-description p {
-  line-height: 1.6;
-  color: linear-gradient(white, yellow);
-  font-weight: bold;
-  width: 60%;
-  font-size: 1.3rem;
-  margin: 2rem auto;
-  margin-bottom: 2rem;
+	line-height: 1.6;
+	color: linear-gradient(white, yellow);
+	font-weight: bold;
+	width: 60%;
+	font-size: 1.3rem;
+	margin: 2rem auto;
+	margin-bottom: 2rem;
 }
 #showcase:before {
-  content: "";
-  position: absolute;
-  background-color: rgb(41, 26, 26);
-  height: 100vh;
-  width: 100%;
-  opacity: 0.8;
+	content: "";
+	position: absolute;
+	background-color: rgb(41, 26, 26);
+	height: 100vh;
+	width: 100%;
+	opacity: 0.8;
 }
 
 .show-gallery {
-  color: white;
-  background-color: black;
-  padding: 1rem 2rem;
-  display: inline;
-  width: 200px;
-  margin: 0 auto;
+	color: white;
+	background-color: black;
+	padding: 1rem 2rem;
+	display: inline;
+	width: 200px;
+	margin: 0 auto;
 }
 /*Gallery that hold the images*/
 #gallery {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 4rem;
-  padding: 2rem;
-  max-width: var(--website-width);
-  margin: 0 auto;
+	margin-top: 3rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 4rem;
+	padding: 2rem;
+	max-width: var(--website-width);
+	margin: 0 auto;
 }
 .showcase {
-  border: 1px solid black;
-  width: 75%;
-  border-radius: 5px;
-  display: flex;
-  align-self: center;
-  justify-self: center;
+	border: 1px solid black;
+	width: 75%;
+	border-radius: 5px;
+	display: flex;
+	align-self: center;
+	justify-self: center;
 }
 .collection-header {
-  text-align: center;
-  margin: 2rem 0;
-  font-size: 2.5rem;
+	text-align: center;
+	margin: 2rem 0;
+	font-size: 2.5rem;
 }
 
 .gallery-pic {
-  --gallery-pic-background-color: rgb(15, 68, 112);
+	--gallery-pic-background-color: rgb(15, 68, 112);
 }
 /*images in the gallery*/
 .gallery-pic {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background: var(--gallery-pic-background-color);
-  border-radius: 20px;
-  color: white;
-  padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	background: var(--gallery-pic-background-color);
+	border-radius: 20px;
+	color: white;
+	padding: 1rem;
 }
 .gallery-pic img {
-  filter: brightness(100%);
-  height: 250px;
-  width: 250px;
+	filter: brightness(100%);
+	height: 250px;
+	width: 250px;
 }
 /*Interactive button to buy and sell */
 .buy-nft,
 .sell-nft {
-  padding: 1rem 4rem;
-  margin: 2rem 0;
-  cursor: pointer;
-  background-color: red;
-  color: white;
-  font-weight: bold;
-  font-size: 1.5rem;
+	padding: 1rem 4rem;
+	margin: 2rem 0;
+	cursor: pointer;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5rem;
 }
 .gallery-pic h3 {
-  margin: 1rem 0;
+	margin: 1rem 0;
 }
 .gallery-pic p {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 1rem 0;
-  margin-top: -1rem;
+	font-size: 1.25rem;
+	font-weight: bold;
+	margin: 1rem 0;
+	margin-top: -1rem;
 }
 
 /*Custom Alert styling*/
 
 /*Overlay */
 .relative-layer {
-  position: relative;
-  display: none;
+	position: relative;
+	display: none;
 }
 .alert-overlay {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgb(124, 124, 124);
-  opacity: 0.75;
-  z-index: 100;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgb(124, 124, 124);
+	opacity: 0.75;
+	z-index: 100;
 }
 
 /*The actual alert */
 .alert {
-  display: grid;
-  grid-template-columns: 1fr;
-  position: fixed;
-  text-align: center;
-  width: var(--website-width);
-  margin: 0 auto;
-  z-index: 100000;
+	display: grid;
+	grid-template-columns: 1fr;
+	position: fixed;
+	text-align: center;
+	width: var(--website-width);
+	margin: 0 auto;
+	z-index: 100000;
 }
 
 .header,
 .footer {
-  background-color: rgb(29, 152, 235);
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.75rem;
-  border-radius: 10px 10px 0 0;
+	background-color: rgb(29, 152, 235);
+	display: flex;
+	justify-content: flex-end;
+	padding: 0.75rem;
+	border-radius: 10px 10px 0 0;
 }
 .footer {
-  border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
 }
 .footer button {
-  padding: 0.75rem 1.5rem;
-  cursor: pointer;
-  background-color: rgb(23, 62, 131);
-  font-size: 1.15rem;
-  font-weight: bold;
-  color: white;
+	padding: 0.75rem 1.5rem;
+	cursor: pointer;
+	background-color: rgb(23, 62, 131);
+	font-size: 1.15rem;
+	font-weight: bold;
+	color: white;
 }
 
 .alert h3 {
-  padding: 1rem;
-  font-size: 2rem;
-  color: white;
-  width: 100%;
+	padding: 1rem;
+	font-size: 2rem;
+	color: white;
+	width: 100%;
 }
 
 /*Alert body or section with the text*/
 .body {
-  padding: 2rem;
-  background-color: rgb(216, 216, 216);
+	padding: 2rem;
+	background-color: rgb(216, 216, 216);
 }
 .alert p {
-  font-size: 1.5rem;
-  margin: 1rem;
+	font-size: 1.5rem;
+	margin: 1rem;
 }
 .alert-container {
-  position: fixed;
+	position: fixed;
 }

@@ -102,7 +102,6 @@ async function getRequest(userName) {
 	const request = await fetch("https://nft-collector.herokuapp.com/users")
 		.then((data) => data.json())
 		.then((users) => {
-			console.log(user);
 			let userExists;
 			users.map((user) => {
 				if (user.username === userName) {

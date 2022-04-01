@@ -1,5 +1,32 @@
 const container = document.getElementById("container");
+const hamburgerMenu = document.querySelector(".hamburger-menu");
 
+hamburgerMenu.addEventListener("click", () => {
+	console.log("toggle menu ");
+	const menu = document.getElementById("header");
+	const line = document.querySelector(".line");
+	const topLine = document.querySelector(".top-line");
+	const bottomLine = document.querySelector(".bottom-line");
+	console.log(line.classList);
+	if (line.classList.contains("checked")) {
+		menu.classList.remove("display");
+
+		topLine.style = "transform: rotate(0deg);  top: 25px";
+		bottomLine.style = "transform: rotate(0deg); top: 50px";
+
+		line.style = "transform: rotate(0deg) ";
+		line.classList.remove("checked");
+		console.log(line.classList);
+	} else {
+		// menu.style = "transform: translateX(0); opacity: 1; z-index: 100; ";
+		menu.classList.add("display");
+		topLine.style = "transform: rotate(135deg);  top: 37.5px";
+		bottomLine.style = "transform: rotate(45deg); top: 37.5px";
+
+		line.style = "transform: rotate(45deg) ";
+		line.classList.add("checked");
+	}
+});
 //navbar buttons
 const signUpBtn = document.getElementById("sign-up");
 const loginButton = document.getElementById("login-btn");

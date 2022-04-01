@@ -1,6 +1,7 @@
 #gallery {
 	grid-template-columns: repeat(3, 1fr);
 }
+
 .gallery-pic img {
 	height: 200px;
 	width: 200px;
@@ -43,7 +44,6 @@
 		font-weight: bold;
 	}
 	#account-btns {
-		height: 75px;
 		position: relative;
 		justify-content: center;
 	}
@@ -175,5 +175,68 @@
 	.gallery-pic img {
 		height: 150px;
 		width: 150px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	/* #header {
+		display: none;
+	} */
+	#header {
+		height: 100vh;
+		display: flex;
+
+		position: fixed;
+		opacity: 0;
+		background-color: black;
+		align-items: center;
+		font-weight: bold;
+		transform: translateX(-100%);
+		transition: all 1s, opacity 0.25s;
+		z-index: -1;
+	}
+	#header.display {
+		transform: translateX(0%);
+		opacity: 1;
+		z-index: 100;
+	}
+
+	#header ul {
+		flex-direction: column;
+	}
+	#header ul li {
+		font-size: 2rem;
+		padding: 0.5rem;
+	}
+	#navbar {
+		display: block;
+		height: 40%;
+		grid-template-columns: 1fr;
+	}
+	.current {
+		padding: 0;
+	}
+	#account-btns {
+		flex-direction: column;
+		width: 100%;
+		margin-top: 1rem !important;
+	}
+	#account-btns a {
+		margin-top: 2rem;
+	}
+	.btn {
+		padding: 1rem 2rem;
+		font-size: 1.5rem;
+		text-align: center;
+		margin-top: 2rem;
+	}
+	#profile {
+		margin-top: 5rem;
+	}
+	.login {
+		height: 105vh;
+	}
+	.login-add-page .login {
+		height: 105vh;
 	}
 }
