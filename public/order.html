@@ -1,94 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/de9b8a8f63.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./css/order.css">
-  <link rel="stylesheet" href="./media-queries/responsive-order.css" media = "screen and (max-width: 1000px)">
-  <title>Order NFT</title>
-</head>
-<body>
-  <div id="container">
-    <div class="container-2">
-      <h1 class = "place-order-heading">Place Order</h1>
-      <div class="nft-area">
-        <div class="back-arrow">
-          <div class="arrow-tip">
-          </div>
-          <div class="arrow"></div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="./images/favicon-32x32.png" />
 
-        </div>
+		<script
+			src="https://kit.fontawesome.com/de9b8a8f63.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="./css/order.css" />
+		<link
+			rel="stylesheet"
+			href="./media-queries/responsive-order.css"
+			media="screen and (max-width: 1000px)"
+		/>
+		<title>Order NFT</title>
+	</head>
+	<body>
+		<div id="container">
+			<div class="container-2">
+				<h1 class="place-order-heading">Place Order</h1>
+				<div class="nft-area">
+					<div class="back-arrow">
+						<div class="arrow-tip"></div>
+						<div class="arrow"></div>
+					</div>
 
-        <div class="nft-container">
-          <div class = "nft-pic"> 
-            <div class = "image-heading">
-              <h3 class = "name"> Bored Ape </h3>
-              <img src="" alt="" class="nft-to-buy">
+					<div class="nft-container">
+						<div class="nft-pic">
+							<div class="image-heading">
+								<h3 class="name">Bored Ape</h3>
+								<img src="" alt="" class="nft-to-buy" />
+							</div>
+							<div class="nft-license-background">
+								<h4>Price: <span class="nft-price"></span></h4>
 
-            </div>
-            <div class = "nft-license-background">
-              <h4>Price:  <span class = "nft-price"></span></h4>
-              
-              <p>Can you believe that this image was sold for <span class = "nft-price"></span> dollars? But now with the NFT Collector you can purchase and store this art for infinitely less than it was sold for. </p>
-              <h3> Quantity</h3>
-              <div class="counter">
-                <div class="decrement"> 
-                   <div class="subtract-sign"></div>
-                 </div>
-                <div class="quantity">0</div>
-                <div class="increment">
-                 <div class="subtract-sign"></div>
-                 <div class="vertical-sign"></div>
-   
-                </div>
-              </div>
-              <button class="place-order">
-               Place Order
-              </button>
-            </div>
-
-          </div>
-          <!-- <div class="tbar"></div>
+								<p>
+									Can you believe that this image was sold for
+									<span class="nft-price"></span> dollars? But now with the NFT
+									Collector you can purchase and store this art for infinitely
+									less than it was sold for.
+								</p>
+								<h3>Quantity</h3>
+								<div class="counter">
+									<div class="decrement">
+										<div class="subtract-sign"></div>
+									</div>
+									<div class="quantity">0</div>
+									<div class="increment">
+										<div class="subtract-sign"></div>
+										<div class="vertical-sign"></div>
+									</div>
+								</div>
+								<button class="place-order">Place Order</button>
+							</div>
+						</div>
+						<!-- <div class="tbar"></div>
            -->
-          
-        </div>
-        <div class="purchase-screen">
-          <h3 class = "name"> </h3>
-          <h4>You're almost done ordering your Bored Ape NFT!</h4>
-          <h5>Now you can bypass spending millions of dollars by double clicking the image and it will be saved to your portfolio. </h5>
-          <!-- <a href = "nft-show.jpg" download = 'computer' class = "download"> -->
-          <img src="" alt="" class="nft-to-buy" id = "double-click">
-              
+					</div>
+					<div class="purchase-screen">
+						<h3 class="name"></h3>
+						<h4>You're almost done ordering your Bored Ape NFT!</h4>
+						<h5>
+							Now you can bypass spending millions of dollars by double clicking
+							the image and it will be saved to your portfolio.
+						</h5>
+						<!-- <a href = "nft-show.jpg" download = 'computer' class = "download"> -->
+						<img src="" alt="" class="nft-to-buy" id="double-click" />
 
-          <!-- </a> -->
-          <p class = "order-summary"> <span class="total-quantity"> </span> of the 
-            <span class="name">Bored Ape</span> NFts at $
-            <span class="nft-price"></span>  each for a total of $<span class="total-amount"></span> million </p> 
-        </div>
-        
-      </div>
-      <div class="menu-screen">
-        <h3> <span class="name"> </span> Was successfully added to your portfolio!</h3>
-        <p>Click here to see your updated portfolio</p>
-        <a href="portfolio.html"> Go To Portfolio</a>
-        <p>Click here to go back to the homepage to check out more NFTS you can buy. </p>
-        
-        <a href="index.html"> Go To Homepage</a>
+						<!-- </a> -->
+						<p class="order-summary">
+							<span class="total-quantity"> </span> of the
+							<span class="name">Bored Ape</span> NFts at $
+							<span class="nft-price"></span> each for a total of $<span
+								class="total-amount"
+							></span>
+							million
+						</p>
+					</div>
+				</div>
+				<div class="menu-screen">
+					<h3>
+						<span class="name"> </span> Was successfully added to your
+						portfolio!
+					</h3>
+					<p>Click here to see your updated portfolio</p>
+					<a href="portfolio.html"> Go To Portfolio</a>
+					<p>
+						Click here to go back to the homepage to check out more NFTS you can
+						buy.
+					</p>
 
-      </div>
-     
-    </div>
-    
-    
-  
-    
-  </div>
- 
-<!-- 
+					<a href="index.html"> Go To Homepage</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 
   <script type = "module" src="app.js"></script> -->
-  <script src="./js/httpRequests.js"></script>
-  <script src="./js/order.js"></script>
-</body>
+		<script src="./js/httpRequests.js"></script>
+		<script src="./js/order.js"></script>
+	</body>
 </html>
