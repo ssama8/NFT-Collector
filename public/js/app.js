@@ -61,6 +61,7 @@ function populateGallery(nft) {
 	description.textContent = nft.description;
 	button.textContent = "Buy Now";
 	image.src = nft.src;
+	image.alt = nft.name;
 
 	//Adding classes for styling purposes
 	button.classList.add("buy-nft");
@@ -83,7 +84,7 @@ container.addEventListener("click", orderNFT);
 
 function orderNFT(e) {
 	if (e.target.classList.contains("buy-nft")) {
-		//Variable from the menu.js file that stores wheter an account is signed in or not, if there is nobody signed in the show the custom alert that you have to sign up or login to order nfts.
+		//Variable from the menu.js file that stores wheter an account is signed in or not
 		if (!accountState.signedIn) {
 			showAlert();
 		}

@@ -372,6 +372,12 @@ button {
 	color: white;
 	font-weight: bold;
 	font-size: 1.5rem;
+	transition: all 1s; 
+}
+.buy-nft:hover,
+.sell-nft:hover{
+	background-color: darkred;
+
 }
 .gallery-pic h3 {
 	margin: 1rem 0;
