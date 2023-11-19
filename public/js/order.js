@@ -34,7 +34,7 @@ backArrow.style.display = "none";
 
 
 //Creating a new httpRequest object with the link to make the requests
-const getOrderedNFT = new httpRequest("http://localhost:5000/users/placeorder")
+const getOrderedNFT = new httpRequest("http://localhost:4000/users/placeorder")
 
 //Used later when sending the post request to server
 let price,
@@ -161,7 +161,7 @@ function showRedirectScreen(){
 
 async function getUser(img){
 
-   const getLoggedInUser = new httpRequest('http://localhost:5000/users')
+   const getLoggedInUser = new httpRequest('http://localhost:4000/users')
 
     getLoggedInUser.getRequest()
     .then(data=> {
@@ -172,7 +172,7 @@ async function getUser(img){
         return user.login
       })
       //insantiating the postLoggedInUser variable as a httpRequest with the parameters needed to perform the post request 
-      const postLoggedInUser = new httpRequest('http://localhost:5000/users', targetUser[0].username, img, targetUser[0].password, parseInt(counterValue.textContent) )
+      const postLoggedInUser = new httpRequest('http://localhost:4000/users', targetUser[0].username, img, targetUser[0].password, parseInt(counterValue.textContent) )
       //Calls the nftPostPurcasesRequest method with price, header, and the method type which in this case is buy, this is used to differentiate betwen buying and selling. 
       postLoggedInUser.nftPostPurchasesRequest(price, header, "buy")
     })

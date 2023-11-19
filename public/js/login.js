@@ -22,7 +22,7 @@ function loginToAccount(e){
     createErrorMessage("Please fill out all fields")
   }else{
     //Instantiating loginSite as a new httpRequest with null being image source because there is no url involved in the request
-    const loginSite = new httpRequest('http://localhost:5000/users', username, null, password)
+    const loginSite = new httpRequest('http://localhost:4000/users', username, null, password)
     const check = loginSite.loginRequest(true)
     .then(resp=>{
       if(resp.status === 200) setTimeout(window.location.href = "index.html", 250) 

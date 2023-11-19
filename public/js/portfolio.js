@@ -29,7 +29,7 @@ let assetValues = [];
 //function called right away to add every purchased nft to the gallery
 checkUserData();
 async function checkUserData(){
-  const getUser = new httpRequest("http://localhost:5000/users")
+  const getUser = new httpRequest("http://localhost:4000/users")
  getUser.getRequest()
   .then(data=>{
     const copy = data;
@@ -282,7 +282,7 @@ function updatePortfolio(e){
   
     const counterQuantity = parseInt(counterValue.textContent)
     //instantiating post purchases as a new http request 
-    const postPurchases = new httpRequest("http://localhost:5000/users", loggedInUser.username, currentItem, loggedInUser.password,maxSellNumber -  counterQuantity  )
+    const postPurchases = new httpRequest("http://localhost:4000/users", loggedInUser.username, currentItem, loggedInUser.password,maxSellNumber -  counterQuantity  )
     //sends request to server to update the quantity of the sold nft
     postPurchases.nftPostPurchasesRequest(priceToSell, nameSoldNFT, "sell")
 

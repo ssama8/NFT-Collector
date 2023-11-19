@@ -22,7 +22,7 @@ const loadingScreen =  document.querySelector('.loading-screen')
 let loggedInUser ;
 //function run right away to check if theres a user logged in. I
 function init(){
-  const getUser = new httpRequest("http://localhost:5000/users")
+  const getUser = new httpRequest("http://localhost:4000/users")
  getUser.getRequest()
   .then(data=>{
     console.log(data)
@@ -164,7 +164,7 @@ form.addEventListener('click', sendPostRequest)
 function sendPostRequest(e){
   //if the buttonhas the class of submit, send a post request to the users/pics route and send user back to homepage. 
   if(e.target.classList.contains('submit')){
-    const addNFt = new httpRequest("http://localhost:5000/users/pics" )
+    const addNFt = new httpRequest("http://localhost:4000/users/pics" )
     addNFt.addNFT(image.src, nameInput.value, priceInput.value)
     window.location.href = "index.html#gallery"
   }

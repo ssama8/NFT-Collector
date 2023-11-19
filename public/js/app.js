@@ -1,7 +1,4 @@
-/*Made class called httpRequest that is inserted in the 
-HTML before the app.js file to perform http requests to 
-the servers rest api*/
-const users = new httpRequest("http://localhost:5000/users/pics")
+const users = new httpRequest("http://localhost:4000/users/pics")
 
 //Container holding everything used for event delegation 
 const container = document.getElementById('container');
@@ -20,7 +17,7 @@ const alertLayer = document.querySelector(".relative-layer")
 
 
 /*Get Request to server ran initially, to look for a logged in user.  */
-const checkLogin = new httpRequest("http://localhost:5000/users")
+const checkLogin = new httpRequest("http://localhost:4000/users")
 checkLogin.getRequest() //method made to send a get request to server
 .then(data =>{
  const copy = data;   //storing the data returned in a separate variable
@@ -103,12 +100,12 @@ function orderNFT(e){
   
     const url = img[0].src
     //Instantiating a new httpRequest with the username of the user and the source of the nft image needed to display the correct NFT on the order page
-   const nftToOrder = new httpRequest("http://localhost:5000/users/placeorder", currentUser[0].username, url )
+   const nftToOrder = new httpRequest("http://localhost:4000/users/placeorder", currentUser[0].username, url )
 
    nftToOrder.nftOrderPostRequest();  
 
  
-       window.location.href = "http://localhost:5000/order.html"
+       window.location.href = "http://localhost:4000/order.html"
     }
  
   }

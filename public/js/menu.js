@@ -24,7 +24,7 @@ let currentUser;
 //function that gets the user thats logged in 
 async function getDetails(){
   
-  const getDetails = new httpRequest("http://localhost:5000/users" )
+  const getDetails = new httpRequest("http://localhost:4000/users" )
   const findLogin = getDetails.getRequest()
   .then(data=>  {
     let copyData = [...data];
@@ -112,7 +112,7 @@ function signOut(e){
     e.preventDefault();
     getDetails()
     .then(user => {
-      const signOut = new httpRequest('http://localhost:5000/users', user[0].username, null, user[0].password)
+      const signOut = new httpRequest('http://localhost:4000/users', user[0].username, null, user[0].password)
       //saying if the users logged in to false 
       signOut.loginRequest(false)
       accountState.signedIn = false;
@@ -143,7 +143,7 @@ function updateChangeRequest(e){
     if(e.target.classList.contains("change-request")){
     e.preventDefault()
   
-      const sendData = new httpRequest("http://localhost:5000/users/change-request")
+      const sendData = new httpRequest("http://localhost:4000/users/change-request")
      //sendProfileSettings takes in 4 arguments, 1 is the profile pic, 2 is the username, 3 is the password, 4 is to delete the account 
       if(e.target.id === "change-profile-image" ){
         //change profile image

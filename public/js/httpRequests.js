@@ -92,7 +92,7 @@ async deleteAccount (  username ){
 }
 
 // async function checkInfo(status){
-//   const retrieveLogin = await fetch('http://localhost:5000/users',
+//   const retrieveLogin = await fetch('http://localhost:4000/users',
 //   {
 //     method: 'PATCH',
 //     headers: {
@@ -101,7 +101,7 @@ async deleteAccount (  username ){
 //     },
 //     body: JSON.stringify({username: username, password: password, login: status})
 //   })
-//   const get = await fetch('http://localhost:5000/users')
+//   const get = await fetch('http://localhost:4000/users')
 //   .then(data=> data.json())
 //   .then(data=> console.log(data))
   
@@ -127,7 +127,7 @@ async deleteAccount (  username ){
 
 
   
-    //   const rawResponse =  await fetch('http://localhost:5000/users/placeorder', {
+    //   const rawResponse =  await fetch('http://localhost:4000/users/placeorder', {
   //   method: 'POST',
   //   headers: {
   //     'Accept': 'application/json',

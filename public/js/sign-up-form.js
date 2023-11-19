@@ -103,7 +103,7 @@ function validateInputs(e){
 
 
 async function getRequest(userName){
-  const request = await fetch('http://localhost:5000/users')
+  const request = await fetch('http://localhost:4000/users')
   .then(data=> data.json())
   .then(users=>{
     let userExists;
@@ -186,7 +186,7 @@ function checkIfPasswordValid(password, passwordConfirmation){
 
 async function populateGallery(){
   const gallery = document.querySelector('.gallery-container')
-  const getPictures = fetch('http://localhost:5000/users/pics')
+  const getPictures = fetch('http://localhost:4000/users/pics')
   .then(data=>data.json())
   .then(data => {
     const pics = data;
@@ -242,7 +242,7 @@ function sendPostRequest(e){
 
  async function postUser(image){
   //sends post request 
-  const rawResponse =  await fetch('http://localhost:5000/users', {
+  const rawResponse =  await fetch('http://localhost:4000/users', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

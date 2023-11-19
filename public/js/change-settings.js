@@ -10,7 +10,7 @@ const profileImages = document.querySelector('.profile-icon-container');
 const signinForm = document.querySelector('.change-details')
 
 //gets what is being requested to change
-const getState = new httpRequest('http://localhost:5000/users/change-request')
+const getState = new httpRequest('http://localhost:4000/users/change-request')
 getState.getRequest()
 .then(settings=>{
   //if user wants to change their profile image
@@ -50,7 +50,7 @@ getState.getRequest()
 //adds images to the gallery 
 async function populateGallery(){
   const gallery = document.querySelector('.gallery-container')
-  const getPictures = fetch('http://localhost:5000/users/pics')
+  const getPictures = fetch('http://localhost:4000/users/pics')
   .then(data=>data.json())
   .then(data => {
     const pics = data;
@@ -85,7 +85,7 @@ function pickIcon(e){
   
 }
 
-const getLoggedInUser = new httpRequest('http://localhost:5000/users');
+const getLoggedInUser = new httpRequest('http://localhost:4000/users');
 //function that returns the user thats logged in  
 function getUser  (){
  const user =  getLoggedInUser.getRequest()
@@ -123,7 +123,7 @@ function sendPatchRequest(){
 
 //sends the request to the server to update the profile image to the one selected and redirects to the homepage
 function patch(user, url){
-  const getUserInfo = new httpRequest(`http://localhost:5000/users/${user[0].username}`)
+  const getUserInfo = new httpRequest(`http://localhost:4000/users/${user[0].username}`)
   getUserInfo.changeProfileSettings(url);
   window.location.href = 'index.html';
 }
@@ -175,7 +175,7 @@ function checkIfValid(username, password){
  getUser()
  .then(user=>{
   //if the inputs match 
-  const checkInfo = new httpRequest('http://localhost:5000/users', username, null, password)
+  const checkInfo = new httpRequest('http://localhost:4000/users', username, null, password)
   checkInfo.loginRequest(true)
   .then(resp=>{
     console.log(resp);
@@ -302,7 +302,7 @@ function updatePassword(e){
           else{
             getUser()
             .then(user=>{
-              const setPassword = new httpRequest(`http://localhost:5000/users/${user[0].username}`);
+              const setPassword = new httpRequest(`http://localhost:4000/users/${user[0].username}`);
               setPassword.changeProfileSettings(null, null, password);
               window.location.href = "index.html";
             })
@@ -356,7 +356,7 @@ function checkIfUsernameValid(username){
           else{
           getUser()
           .then(user=>{
-            const setUsername = new httpRequest(`http://localhost:5000/users/${user[0].username}`)
+            const setUsername = new httpRequest(`http://localhost:4000/users/${user[0].username}`)
             setUsername.changeProfileSettings(null, username, null);
             window.location.href = "index.html"
           })
@@ -387,7 +387,7 @@ function removeAccount(e){
         //send delete request to the server to remove the account
         getUser()
         .then(user=>{
-          const deleteAccount = new httpRequest(`http://localhost:5000/users/${user[0].username}`)
+          const deleteAccount = new httpRequest(`http://localhost:4000/users/${user[0].username}`)
           deleteAccount.deleteAccount();
 
           window.location.href = "index.html"
